@@ -12,7 +12,7 @@
             <table>
                 <tr>
                     <td>
-                        <asp:Label ID="Label1" runat="server" Text="User Name:"></asp:Label>
+                        <asp:Label ID="name" runat="server" Text="User Name:"></asp:Label>
                     </td>
                     <td>
                         <asp:TextBox ID="txtUserName" runat="server"></asp:TextBox>
