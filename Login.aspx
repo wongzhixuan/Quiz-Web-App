@@ -7,9 +7,11 @@
     <title></title>
 </head>
 <body>
+    <div class="content-container">
     <form id="form1" runat="server">
         <div>
         </div>
     </form>
+        </div>
 </body>
 </html>
