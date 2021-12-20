@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Login.aspx" />
     <Content Include="Resources\bs5\css\bootstrap-grid.css" />
     <Content Include="Resources\bs5\css\bootstrap-grid.min.css" />
     <Content Include="Resources\bs5\css\bootstrap-grid.rtl.css" />
