@@ -67,6 +67,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="LoginChoice.aspx" />
+    <Content Include="Register.aspx" />
     <Content Include="Resources\bs5\css\bootstrap-grid.css" />
     <Content Include="Resources\bs5\css\bootstrap-grid.min.css" />
     <Content Include="Resources\bs5\css\bootstrap-grid.rtl.css" />
@@ -97,7 +99,21 @@
     <Content Include="TeachersMenu.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoginChoice.aspx.cs">
+      <DependentUpon>LoginChoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginChoice.aspx.designer.cs">
+      <DependentUpon>LoginChoice.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
