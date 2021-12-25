@@ -9,11 +9,9 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Button ID="studentLoginBtn" runat="server" OnClick="studentLoginBtn_Click" Text="Login As Student" />
+            <asp:Button ID="loginBtn" runat="server" OnClick="loginBtn_Click" Text="Login" />
 
-            <asp:Button ID="teacherLoginBtn" runat="server" OnClick="teacherLoginBtn_Click" Text="Login As Teacher / Admin" />
-
-            <asp:Button ID="registerButton" runat="server" OnClick="registerBtn_Click" Text="Login As Teacher / Admin" />
+            <asp:Button ID="registerButton" runat="server" OnClick="registerBtn_Click" Text="Register Account" />
 
         </div>
     </form>

@@ -24,22 +24,13 @@ namespace Quiz_Web_App
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// studentLoginBtn control.
+        /// loginBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button studentLoginBtn;
-
-        /// <summary>
-        /// teacherLoginBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button teacherLoginBtn;
+        protected global::System.Web.UI.WebControls.Button loginBtn;
 
         /// <summary>
         /// registerButton control.

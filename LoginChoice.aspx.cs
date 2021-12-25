@@ -14,16 +14,10 @@ namespace Quiz_Web_App
 
         }
 
-        protected void studentLoginBtn_Click(object sender, EventArgs e)
+        protected void loginBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("StudentLoginPage.aspx");
+            Response.Redirect("Login.aspx");
         }
-
-        protected void teacherLoginBtn_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("TeacherLoginPage.aspx");
-        }
-
         protected void registerBtn_Click(object sender, EventArgs e)
         {
             Response.Redirect("Register.aspx");

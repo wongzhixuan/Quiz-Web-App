@@ -86,6 +86,7 @@
                         <asp:DropDownList ID="ddlUserType" runat="server">
                             <asp:ListItem>Student</asp:ListItem>
                             <asp:ListItem>Teacher</asp:ListItem>
+                            
                         </asp:DropDownList>
                         <asp:Label Text="*" runat="server" ForeColor="Red"/>
                     </td>
@@ -96,6 +97,7 @@
 
                     </td>
                     <td colspan="2">
+                        <asp:Button ID="backBtn" runat="server" Text="Back" OnClick="backBtn_Click" />
                         <asp:Button ID="registerBtn" runat="server" Text="Register" OnClick="registerBtn_Click" />
                     </td>
                 </tr>
