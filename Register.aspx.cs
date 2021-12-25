@@ -25,39 +25,49 @@ namespace Quiz_Web_App
 
         protected void registerBtn_Click(object sender, EventArgs e)
         {
-            if (txtCardID.Text == "" || txtPassword.Text == "" || txtReconfirmPassword.Text == "" || txtFullName.Text == "" || txtEmailAddress.Text == "")
+            bool UserExist;
+            UserExist = this.CheckUserExist();
+
+            if (UserExist == false)
             {
-                lblSuccessMessage.Text = lblErrorMessage.Text = "";
-                lblErrorMessage.Text = "Mandatory Fields Are Still Empty!";
-            }
-            else if (txtReconfirmPassword.Text != txtPassword.Text)
-            {
-                lblSuccessMessage.Text = lblErrorMessage.Text = "";
-                lblErrorMessage.Text = "Password Do Not Match!";
+                if (txtCardID.Text == "" || txtPassword.Text == "" || txtReconfirmPassword.Text == "" || txtFullName.Text == "" || txtEmailAddress.Text == "")
+                {
+                    lblSuccessMessage.Text = lblErrorMessage.Text = "";
+                    lblErrorMessage.Text = "Mandatory Fields Are Still Empty!";
+                }
+                else if (txtReconfirmPassword.Text != txtPassword.Text)
+                {
+                    lblSuccessMessage.Text = lblErrorMessage.Text = "";
+                    lblErrorMessage.Text = "Password Do Not Match!";
+                }
+                else
+                {
+                    using (SqlConnection sqlCon = new SqlConnection(connectionString))
+                    {
+                        sqlCon.Open();
+                        SqlCommand sqlCmd = new SqlCommand("UserAddOrEdit", sqlCon);
+                        sqlCmd.CommandType = CommandType.StoredProcedure;
+                        sqlCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(hfUserID.Value == "" ? "0" : hfUserID.Value));
+                        sqlCmd.Parameters.AddWithValue("@FullName", txtFullName.Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@EmailAddress", txtEmailAddress.Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@PhoneNumber", txtPhoneNumber.Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@CardID", txtCardID.Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
+                        sqlCmd.Parameters.AddWithValue("@UserType", ddlUserType.SelectedValue);
+
+                        sqlCmd.ExecuteNonQuery();
+                        sqlCon.Close();
+                        ClearTextBox();
+                        lblSuccessMessage.Text = "Your Request Was Submitted Successfully.";
+                    }
+                }
             }
             else
             {
-                using (SqlConnection sqlCon = new SqlConnection(connectionString))
-                {
-                    sqlCon.Open();
-                    SqlCommand sqlCmd = new SqlCommand("UserAddOrEdit", sqlCon);
-                    sqlCmd.CommandType = CommandType.StoredProcedure;
-                    sqlCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(hfUserID.Value == "" ? "0" : hfUserID.Value));
-                    sqlCmd.Parameters.AddWithValue("@FullName", txtFullName.Text.Trim());
-                    sqlCmd.Parameters.AddWithValue("@EmailAddress", txtEmailAddress.Text.Trim());
-                    sqlCmd.Parameters.AddWithValue("@PhoneNumber", txtPhoneNumber.Text.Trim());
-                    sqlCmd.Parameters.AddWithValue("@CardID", txtCardID.Text.Trim());
-                    sqlCmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
-                    sqlCmd.Parameters.AddWithValue("@UserType", ddlUserType.SelectedValue);
-
-                    sqlCmd.ExecuteNonQuery();
-                    sqlCon.Close();
-                    ClearTextBox();
-                    lblSuccessMessage.Text = "Your Request Was Submitted Successfully.";
-                }
+                ClearTextBox();
+                lblErrorMessage.Text = "Register Failed. This Card ID was registered!";
             }
-            
-            
+
             
         }
 
@@ -71,6 +81,31 @@ namespace Quiz_Web_App
             hfUserID.Value = "";
             txtFullName.Text = txtEmailAddress.Text = txtPhoneNumber.Text = txtCardID.Text = txtPassword.Text = txtReconfirmPassword.Text = "";
             lblSuccessMessage.Text = lblErrorMessage.Text = "";
+        }
+
+        private bool CheckUserExist()
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connectionString))
+            {
+                sqlCon.Open();
+                string query = "SELECT * FROM UserAcc WHERE CardID=@CardID";
+                SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
+                sqlCmd.Parameters.AddWithValue("@CardID", txtCardID.Text.Trim());
+                SqlDataReader rdr;
+                rdr = sqlCmd.ExecuteReader();
+                if (rdr.HasRows)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
+                sqlCon.Close();
+            }
+
+            
         }
     }
 }
