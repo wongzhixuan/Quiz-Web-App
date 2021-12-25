@@ -15,7 +15,7 @@
                         <asp:Label Text="Enter Your Card ID" runat="server" />
                     </td>
                     <td colspan="2">
-                        <asp:TextBox ID="txtCardID" runat="server"/>
+                        <asp:TextBox ID="txtCardID" runat="server" onkeyup="this.value=this.value.toUpperCase()" MaxLength="10"/>
                         <asp:Label Text="*" runat="server" ForeColor="Red"/>
                     </td>
                 </tr>
@@ -25,7 +25,7 @@
                         <asp:Label Text="Enter Your Password" runat="server" />
                     </td>
                     <td colspan="2">
-                        <asp:TextBox ID="txtPassword" runat="server"/>
+                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
                         <asp:Label Text="*" runat="server" ForeColor="Red"/>
                     </td>
                 </tr>

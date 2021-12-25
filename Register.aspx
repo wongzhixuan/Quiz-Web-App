@@ -21,7 +21,7 @@
                         <asp:Label Text="Enter Your Full Name: " runat="server"/>
                     </td>
                     <td colspan="2">
-                        <asp:TextBox ID="txtFullName" runat="server"/>
+                        <asp:TextBox ID="txtFullName" runat="server" onkeyup="this.value=this.value.toUpperCase()"/>
                         <asp:Label Text="*" runat="server" ForeColor="Red"/>
                     </td>
                 </tr>
@@ -31,7 +31,7 @@
                         <asp:Label Text="Enter Your Email Address: " runat="server"/>
                     </td>
                     <td colspan="2">
-                        <asp:TextBox ID="txtEmailAddress" runat="server"/>
+                        <asp:TextBox ID="txtEmailAddress" runat="server" TextMode="Email"/>
                         <asp:Label Text="*" runat="server" ForeColor="Red"/>
                     </td>
                 </tr>
@@ -53,7 +53,7 @@
                         <asp:Label Text="Enter Your Card ID: <br />This Card ID will be your User ID." runat="server"/>
                     </td>
                     <td colspan="2">
-                        <asp:TextBox ID="txtCardID" runat="server"/>
+                        <asp:TextBox ID="txtCardID" runat="server" onkeyup="this.value=this.value.toUpperCase()" MaxLength="10"/>
                         <asp:Label Text="*" runat="server" ForeColor="Red"/>
                     </td>
                 </tr>
