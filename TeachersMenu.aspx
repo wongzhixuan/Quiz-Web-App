@@ -3,10 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="content-container">
-        <asp:Label ID="lblCardID" runat="server" />
-        <div id="main-content" class="main">
-            <div class="rightcolumn">
+    <div class="rightcolumn">
                 <div id="sticker">
                     <nav>
                         <ul id="panel" class ="panel">
@@ -23,8 +20,14 @@
                     </nav>
                 </div>
             </div>
+    <div class="container green_container">
+    <div class="content-container">
+        <asp:Label ID="lblCardID" runat="server" />
+        <div id="main-content" class="main">
+            
         </div>
     </div>
+        </div>
 
 
 </asp:Content>

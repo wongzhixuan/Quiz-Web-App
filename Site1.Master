@@ -41,14 +41,14 @@
             </ul>
         </div>
     </nav>
-    <div class="container green_container">
+    
         <form id="form1" runat="server">
             <div>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
         </form>
-    </div>
+
     <footer class="page-footer">
 
         <div class="footer-copywrite text-center">@ 2021 Copyright Quiziva</div>
