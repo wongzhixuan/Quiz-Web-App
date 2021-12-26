@@ -143,9 +143,19 @@ body {
     text-align: center;
 }
 
-    .btn_details:hover {
-        background-color: #333;
-    }
+   
 .class-table{
     margin:2em auto;
+}
+.feature-title {
+    color: #333;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin:2em auto 2em auto;
+
+}
+.form-group{
+    margin:2em;
+    
 }

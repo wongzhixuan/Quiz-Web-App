@@ -101,6 +101,7 @@
     <Content Include="Web.config" />
     <Content Include="TeachersMenu.aspx" />
     <Content Include="Manage Class.aspx" />
+    <Content Include="CreateClass.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Login.aspx.cs">
@@ -145,6 +146,13 @@
     </Compile>
     <Compile Include="Manage Class.aspx.designer.cs">
       <DependentUpon>Manage Class.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateClass.aspx.cs">
+      <DependentUpon>CreateClass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateClass.aspx.designer.cs">
+      <DependentUpon>CreateClass.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
