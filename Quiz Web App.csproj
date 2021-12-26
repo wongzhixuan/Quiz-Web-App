@@ -100,6 +100,7 @@
     <Content Include="Resources\js\jquery.sticky.js" />
     <Content Include="Web.config" />
     <Content Include="TeachersMenu.aspx" />
+    <Content Include="Manage Class.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Login.aspx.cs">
@@ -137,6 +138,13 @@
     </Compile>
     <Compile Include="TeachersMenu.aspx.designer.cs">
       <DependentUpon>TeachersMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage Class.aspx.cs">
+      <DependentUpon>Manage Class.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage Class.aspx.designer.cs">
+      <DependentUpon>Manage Class.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -50,18 +50,18 @@ body {
     background-color: darkslategrey;
     border-radius: 5px;
     margin: 2em 2em 0em 2em;
-    padding: 2em 4em 0 4em;
+    padding: 2em 2em 0 2em;
 }
 
 .content-container {
     background: #fff;
     height: 1000px;
-    margin: 4em 4em 0em 4em;
+    margin: 4em 2em 0em 2em;
     padding: 2em;
     position: relative;
     border-radius: 5px;
     scroll-behavior: smooth;
-    overflow: hidden;
+    overflow:scroll;
 }
 .page-footer {
     background-color: #222;
@@ -134,3 +134,18 @@ body {
             -o-transform: translateX(25px);
             -webkit-transform: translateX(25px);
         }
+
+.btn_details {
+    border-radius: 5px;
+    height: 50px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+    .btn_details:hover {
+        background-color: #333;
+    }
+.class-table{
+    margin:2em auto;
+}
