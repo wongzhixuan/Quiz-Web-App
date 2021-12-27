@@ -29,38 +29,33 @@
                 <center>
                     <asp:Label runat="server" Text="Class List" Font-Bold="True" Font-Size="Larger"></asp:Label>
 
-                    <asp:GridView runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" ID="class_view" DataKeyNames="class_id" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CssClass="table " OnRowCancelingEdit="class_view_RowCancelingEdit" OnRowUpdating="class_view_RowUpdating"  OnRowDeleting="class_view_RowDeleting" OnRowEditing="class_view_RowEditing" >
+                    <asp:GridView runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" ID="class_view" DataKeyNames="class_id" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CssClass="table " OnRowCancelingEdit="class_view_RowCancelingEdit" OnRowUpdating="class_view_RowUpdating"  OnRowDeleting="class_view_RowDeleting" OnRowEditing="class_view_RowEditing" OnSorting="class_view_Sorting" OnPageIndexChanging ="class_view_PageIndexChanging" >
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
 
                         <Columns>
-                            <%--
-                            <asp:TemplateField HeaderText="Name" SortExpression="name">
+                            
+                            <asp:TemplateField HeaderText="Name" SortExpression="class_name">
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("name") %>'></asp:TextBox>
+                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("class_name") %>'></asp:TextBox>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("name") %>'></asp:Label>
+                                    <asp:Label ID="class_name" runat="server" Text='<%# Bind("class_name") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Email" SortExpression="email">
+                            <asp:TemplateField HeaderText="Description" SortExpression="class_description">
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("email") %>'></asp:TextBox>
+                                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("class_description") %>'></asp:TextBox>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("email") %>'></asp:Label>
+                                    <asp:Label ID="class_descrip" runat="server" Text='<%# Bind("class_description") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="City" SortExpression="city">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("city") %>'></asp:TextBox>
-                                </EditItemTemplate>
+                            <asp:TemplateField HeaderText="Created" SortExpression="created_date">
+                                
                                 <ItemTemplate>
-                                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("city") %>'></asp:Label>
+                                    <asp:Label ID="created_date" runat="server" Text='<%# Bind("created_date") %>'></asp:Label>
                                 </ItemTemplate>
-                            </asp:TemplateField>--%>
-                            <asp:BoundField DataField="class_name" HeaderText="Name" SortExpression="class_name" />
-                            <asp:BoundField DataField="class_description" HeaderText="Description" SortExpression="class_description" />
-                            <asp:BoundField DataField="created_date" HeaderText="Created" SortExpression="created_date" />
+                            </asp:TemplateField>
                             <asp:CommandField ButtonType="Button" ShowEditButton="True"  ControlStyle-CssClass="btn btn-primary">
 <ControlStyle CssClass="btn btn-primary"></ControlStyle>
                             </asp:CommandField>
@@ -82,6 +77,10 @@
                     </asp:GridView>
                     
                     </center>
+                <asp:Label ID="SuccessMessage" runat="server" Text="" CssClass="alert alert-success alert-dismissible fade show" Visible="false"></asp:Label>
+                 <br />
+                <asp:Label ID="ErrorMessage" runat="server" Text="" CssClass="alert alert-danger alert-dismissible fade show" Visible="false"></asp:Label>
+                
             </div>
 
 
