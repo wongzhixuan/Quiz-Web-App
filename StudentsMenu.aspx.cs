@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Quiz_Web_App
 {
-    public partial class TeachersMenu : System.Web.UI.Page
+    public partial class StudentsMenu : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -16,7 +16,7 @@ namespace Quiz_Web_App
 
         protected void profileBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("TeachersProfile.aspx");
+            Response.Redirect("StudentsProfile.aspx");
         }
     }
 }
