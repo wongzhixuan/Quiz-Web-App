@@ -102,6 +102,8 @@
     <Content Include="TeachersMenu.aspx" />
     <Content Include="Manage Class.aspx" />
     <Content Include="CreateClass.aspx" />
+    <Content Include="Manage Quiz.aspx" />
+    <Content Include="CreateQuiz.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Login.aspx.cs">
@@ -153,6 +155,20 @@
     </Compile>
     <Compile Include="CreateClass.aspx.designer.cs">
       <DependentUpon>CreateClass.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage Quiz.aspx.cs">
+      <DependentUpon>Manage Quiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage Quiz.aspx.designer.cs">
+      <DependentUpon>Manage Quiz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateQuiz.aspx.cs">
+      <DependentUpon>CreateQuiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateQuiz.aspx.designer.cs">
+      <DependentUpon>CreateQuiz.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
