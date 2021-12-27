@@ -37,21 +37,27 @@
                     <asp:Label ID="class_student" runat="server" Text="Add Students" CssClass="form-label"></asp:Label>
                     
                     <asp:TextBox ID="student_id" runat="server" CssClass="w-75 form-control" placeholder="student ID"> </asp:TextBox>
-                    <asp:Button ID="add_student" runat="server" Text="Add+" CssClass="btn btn-primary float-end " OnClick="add_student_Click"/></div>
+                    <asp:Button ID="add_student" runat="server" Text="Add+" CssClass="btn btn-primary float-end " OnClick="add_student_Click" /></div>
                   
                     <br />
                     <div class="form-group">
+                    
                     <asp:Table ID="student_added" runat="server" CssClass="w-50 table student_table table-dark">
+                        
                         <asp:TableHeaderRow ><asp:TableHeaderCell Text="StudentID" CssClass="col"></asp:TableHeaderCell>
-                            <asp:TableHeaderCell Text="StudentName" CssClass="col"></asp:TableHeaderCell></asp:TableHeaderRow>
+                        <asp:TableHeaderCell Text="StudentName" CssClass="col"></asp:TableHeaderCell>
+                        
+                        </asp:TableHeaderRow>
+                        
                         <asp:TableRow CssClass="row"></asp:TableRow>
+                        
                     </asp:Table>
                     </div>
                     <div class="form-group">
-                    <asp:Button ID="confirm_create" runat="server" Text="Confirm" CssClass="btn btn-primary btn_details float-end" OnClick="confirm_create_Click"/></div>
-                <asp:Label ID="SuccessMessage" runat="server" Text="" CssClass="alert alert-success alert-dismissible fade show"></asp:Label>
+                    <asp:Button ID="confirm_create" runat="server" Text="Confirm" CssClass="btn btn-primary btn_details float-end" OnClick="confirm_create_Click" UseSubmitBehavior ="false" OnClientClick="this.disabled='true' ; this.value= 'Please Wait..'"  /></div>
+                <asp:Label ID="SuccessMessage" runat="server" Text="" CssClass="alert alert-success alert-dismissible fade show" Visible="false"></asp:Label>
                  <br />
-                <asp:Label ID="ErrorMessage" runat="server" Text="" CssClass="alert alert-danger alert-dismissible fade show"></asp:Label>
+                <asp:Label ID="ErrorMessage" runat="server" Text="" CssClass="alert alert-danger alert-dismissible fade show" Visible="false"></asp:Label>
                 
                     <br />
                     <br />
