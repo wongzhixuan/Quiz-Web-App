@@ -14,6 +14,9 @@ namespace Quiz_Web_App
 
         }
 
-       
+        protected void create_quiz_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
