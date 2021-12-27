@@ -14,7 +14,7 @@
                             <li class="animation"><a href="TeachersMenu.aspx">Dashboard</a></li>
                             <li class="animation"><a href="Manage Class.aspx">Manage Class</a></li>
                             <li class="animation"><a href="#Quiz">Manage Quiz</a></li>
-                            <li class="animation" style="margin-top: 5px"><a href="#Student">Manage Students Grades</a></li>
+                            <li class="animation" style="margin-top: 5px"><a href="#Student">Manage Students </a></li>
 
                         </ul>
                     </nav>
