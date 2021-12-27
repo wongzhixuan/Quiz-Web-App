@@ -153,6 +153,7 @@ namespace Quiz_Web_App
                 CurrentSortDirection = SortDirection.Descending;
                 SortGridView(ColumnTosort, DESCENDING);
             }
+            // Sort in Ascending 
             else
             {
                 CurrentSortDirection = SortDirection.Ascending;

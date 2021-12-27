@@ -27,7 +27,7 @@
 
             <div class="class-table">
                 <center>
-                    <asp:Label runat="server" Text="Class List" Font-Bold="True" Font-Size="Larger"></asp:Label>
+                    <asp:Label runat="server" Text="Class List" Font-Bold="True" Font-Size="Larger" CssClass=" feature-title"></asp:Label>
 
                     <asp:GridView runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" ID="class_view" DataKeyNames="class_id" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CssClass="table " OnRowCancelingEdit="class_view_RowCancelingEdit" OnRowUpdating="class_view_RowUpdating"  OnRowDeleting="class_view_RowDeleting" OnRowEditing="class_view_RowEditing" OnSorting="class_view_Sorting" OnPageIndexChanging ="class_view_PageIndexChanging" >
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
