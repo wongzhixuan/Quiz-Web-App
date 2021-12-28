@@ -29,60 +29,65 @@ namespace Quiz_Web_App
             DateTime now = DateTime.Now;
 
             ArrayList arrayList = (ArrayList)ViewState["student_table"];
-            
-            using (SqlConnection sqlConnection = new SqlConnection(connection_string))
+            if (text_class_name.Text.Trim() == "")
             {
-                sqlConnection.Open();
-                SqlCommand sqlCmd = new SqlCommand("CreateClass", sqlConnection);
-                sqlCmd.CommandType = CommandType.StoredProcedure;
-                sqlCmd.Parameters.AddWithValue("@class_id", Convert.ToInt32(hfClassID.Value == "" ? "0" : hfClassID.Value));
-                sqlCmd.Parameters.AddWithValue("@class_name", text_class_name.Text.Trim());
-                sqlCmd.Parameters.AddWithValue("@class_description", text_class_description.Text.Trim());
-                sqlCmd.Parameters.AddWithValue("@teacher_id", Session["CardID"]);
-                sqlCmd.Parameters.AddWithValue("@created_date", now);
-
-                int class_id = 0;
-                class_id = Convert.ToInt32(sqlCmd.ExecuteScalar());
-                int student_count = 0;
-                int arrayList_count = 0;
-                if (arrayList == null)
-                {
-                    student_count = 0;
-                    arrayList_count = 0;
-                }
-                else
-                {
-                    foreach(String student_id in arrayList)
-                    {
-                        SqlCommand sqlCmd2 = new SqlCommand("LinkStudentToClass", sqlConnection);
-                        sqlCmd2.CommandType = CommandType.StoredProcedure;
-                        sqlCmd2.Parameters.AddWithValue("@class_id", class_id);
-                        sqlCmd2.Parameters.AddWithValue("@student_id", student_id);
-                        student_count = student_count + sqlCmd2.ExecuteNonQuery();
-                    }
-                    arrayList_count = arrayList.Count;
-
-                }
-                
-
-                sqlConnection.Close();
-                ClearTextBox();
-                if (class_id > 0)
-                {
-                    SuccessMessage.Text = "Your Class is Created Successfully. Class Id :"+class_id+", "+student_count+"/" + arrayList_count +" students added." ;
-                    SuccessMessage.Visible = true;
-                }
-                else
-                {
-                    ErrorMessage.Text = "Class Create Failed.";
-                    ErrorMessage.Visible = true;
-                }
-                
-
-
+                ErrorMessage.Visible = true;
+                ErrorMessage.Text = "The class name should not be empty";
 
             }
-            confirm_create.Click -= confirm_create_Click;
+            else
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(connection_string))
+                {
+                    sqlConnection.Open();
+                    SqlCommand sqlCmd = new SqlCommand("CreateClass", sqlConnection);
+                    sqlCmd.CommandType = CommandType.StoredProcedure;
+                    sqlCmd.Parameters.AddWithValue("@class_id", Convert.ToInt32(hfClassID.Value == "" ? "0" : hfClassID.Value));
+                    sqlCmd.Parameters.AddWithValue("@class_name", text_class_name.Text.Trim());
+                    sqlCmd.Parameters.AddWithValue("@class_description", text_class_description.Text.Trim());
+                    sqlCmd.Parameters.AddWithValue("@teacher_id", Session["CardID"]);
+                    sqlCmd.Parameters.AddWithValue("@created_date", now);
+
+                    int class_id = 0;
+                    class_id = Convert.ToInt32(sqlCmd.ExecuteScalar());
+                    int student_count = 0;
+                    int arrayList_count = 0;
+                    if (arrayList == null)
+                    {
+                        student_count = 0;
+                        arrayList_count = 0;
+                    }
+                    else
+                    {
+                        foreach (String student_id in arrayList)
+                        {
+                            SqlCommand sqlCmd2 = new SqlCommand("LinkStudentToClass", sqlConnection);
+                            sqlCmd2.CommandType = CommandType.StoredProcedure;
+                            sqlCmd2.Parameters.AddWithValue("@class_id", class_id);
+                            sqlCmd2.Parameters.AddWithValue("@student_id", student_id);
+                            student_count = student_count + sqlCmd2.ExecuteNonQuery();
+                        }
+                        arrayList_count = arrayList.Count;
+
+                    }
+
+
+                    sqlConnection.Close();
+                    ClearTextBox();
+                    if (class_id > 0)
+                    {
+                        SuccessMessage.Text = "Your Class is Created Successfully. Class Id :" + class_id + ", " + student_count + "/" + arrayList_count + " students added.";
+                        SuccessMessage.Visible = true;
+                    }
+                    else
+                    {
+                        ErrorMessage.Text = "Class Create Failed.";
+                        ErrorMessage.Visible = true;
+                    }
+
+                }
+                confirm_create.Click -= confirm_create_Click;
+            }
         }
 
         protected void add_student_Click(object sender, EventArgs e)
