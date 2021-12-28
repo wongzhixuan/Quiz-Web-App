@@ -18,6 +18,8 @@ namespace Quiz_Web_App
             if (!Page.IsPostBack)
             {
                 SetInitialRow();
+                SuccessMessage.Visible = false;
+                ErrorMessage.Visible = false;
             }
         }
 
@@ -224,16 +226,71 @@ namespace Quiz_Web_App
 
         protected void btn_save_Click(object sender, EventArgs e)
         {
+            StringCollection sc = new StringCollection();
+            if(ViewState["CurrentTable"]!= null)
+            {
+                DataTable dt = (DataTable)ViewState["CurrentTable"];
+                if(dt.Rows.Count > 0)
+                {
+                    for(int i = 1; i <= dt.Rows.Count; i++ )
+                    {
+                        //extract TextBox Values
+                        TextBox box1 = (TextBox)question_view.Rows[i].Cells[0].FindControl("txbox_title");
+                        TextBox box2 = (TextBox)question_view.Rows[i].Cells[1].FindControl("txbox_score");
+                        TextBox box3 = (TextBox)question_view.Rows[i].Cells[2].FindControl("txbox_op1");
+                        TextBox box4 = (TextBox)question_view.Rows[i].Cells[3].FindControl("txbox_op2");
+                        TextBox box5 = (TextBox)question_view.Rows[i].Cells[4].FindControl("txbox_op3");
+                        TextBox box6 = (TextBox)question_view.Rows[i].Cells[5].FindControl("txbox_op4");
+                        DropDownList dropDownList = (DropDownList)question_view.Rows[i].Cells[6].FindControl("dropdown_answer");
 
+                        //getvalues from textbox and dropdownlist
+                        //add to collections with a comma"," as the delimited value
+                        sc.Add(string.Format("{0},{1}", box1.Text, box2.Text));
+                    }
+                    //call the method for executing inserts
+                    InsertRecords(sc);
+                }
+            }
         }
         private void InsertRecords(StringCollection sc)
         {
+            int count = 0;
+            DataTable dt = (DataTable)ViewState["CurrentTable"];
+            int row_count = dt.Rows.Count;
+            StringBuilder sb = new StringBuilder(string.Empty);
+            string[] splitItems = null;
+            const string sqlStatement = "INSERT INTO Quiz_question (Field1,Field2, Field3) VALUES";
+            foreach (string item in sc)
+            {
+                if (item.Contains(","))
+                {
+                    splitItems = item.Split(",".ToCharArray());
+                    sb.AppendFormat("{0}('{1}','{2}','{3}','{4}'); ", sqlStatement, splitItems[0], splitItems[1], splitItems[2], splitItems[3]);
+                }
+            }
             using (SqlConnection con = new SqlConnection(connection_string))
             {
-                StringBuilder sb = new StringBuilder(string.Empty);
-                string[] splitItems = null;
                 
+                con.Open();
+                using(SqlCommand cmd = new SqlCommand(sb.ToString(), con))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    count = count + cmd.ExecuteNonQuery();
+                    
+                }
+                con.Close();
             }
+            if(count >= row_count)
+            {
+                SuccessMessage.Visible = true;
+                SuccessMessage.Text = "Questions Successfully Added";
+            }
+            else
+            {
+                ErrorMessage.Visible = true;
+                ErrorMessage.Text = "Error Occurs! " + count+"/"+row_count+" inserted";
+            }
+
         }
     }
 }

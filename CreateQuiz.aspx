@@ -37,7 +37,10 @@
                 <div class="form-group w-50">
                     <asp:Label ID="lb_Class" runat="server" Text="Class" CssClass="form-label"></asp:Label>
                     <div class="dropdown">
-                    <asp:DropDownList ID="dropdown_class" runat="server" CssClass=" btn btn-primary dropdown-toggle" ></asp:DropDownList>
+                    <asp:DropDownList ID="dropdown_class" runat="server" CssClass=" btn btn-primary dropdown-toggle"  AppendDataBoundItems="true"  >
+                        <asp:ListItem Value="-1">Select</asp:ListItem>
+                    </asp:DropDownList>
+                        
                         </div>
                     <asp:Label ID="Label5" runat="server" Text="Which class the quiz is created for." CssClass="form-text text-muted"></asp:Label>
                 </div>
