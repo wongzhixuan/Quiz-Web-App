@@ -11,7 +11,7 @@ namespace Quiz_Web_App
 {
 
 
-    public partial class TeachersMenu
+    public partial class StudentsMenu
     {
 
         /// <summary>

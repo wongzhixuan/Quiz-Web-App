@@ -49,7 +49,7 @@
                     </td>
                     <td colspan="2">
                         <asp:Button ID="backBtn" runat="server" Text="Back" OnClick="backBtn_Click" />
-                        <asp:Button ID="loginBtn" runat="server" Text="Register" OnClick="loginBtn_Click" />
+                        <asp:Button ID="loginBtn" runat="server" Text="Login" OnClick="loginBtn_Click" />
                     </td>
                 </tr>
 

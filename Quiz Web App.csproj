@@ -97,6 +97,9 @@
     <Content Include="Resources\Images\quizLogo.png" />
     <Content Include="Resources\Images\Quizva.png" />
     <Content Include="Resources\Images\Shinsen-gumi.png" />
+    <Content Include="StudentsMenu.aspx" />
+    <Content Include="StudentsProfile.aspx" />
+    <Content Include="TeachersProfile.aspx" />
     <Content Include="Resources\js\jquery.sticky.js" />
     <Content Include="Web.config" />
     <Content Include="TeachersMenu.aspx" />
@@ -137,12 +140,33 @@
     <Compile Include="Site1.Master.designer.cs">
       <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
+    <Compile Include="StudentsMenu.aspx.cs">
+      <DependentUpon>StudentsMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentsMenu.aspx.designer.cs">
+      <DependentUpon>StudentsMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StudentsProfile.aspx.cs">
+      <DependentUpon>StudentsProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentsProfile.aspx.designer.cs">
+      <DependentUpon>StudentsProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TeachersMenu.aspx.cs">
       <DependentUpon>TeachersMenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="TeachersMenu.aspx.designer.cs">
       <DependentUpon>TeachersMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TeachersProfile.aspx.cs">
+      <DependentUpon>TeachersProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TeachersProfile.aspx.designer.cs">
+      <DependentUpon>TeachersProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manage Class.aspx.cs">
       <DependentUpon>Manage Class.aspx</DependentUpon>
