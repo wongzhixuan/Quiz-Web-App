@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
+using System.Collections;
 
 namespace Quiz_Web_App
 {
@@ -26,6 +27,17 @@ namespace Quiz_Web_App
 
         private void setInitialClass()
         {
+
+            ArrayList classList = GetClassList();
+            foreach(ListItem item in classList)
+            {
+                dropdown_class.Items.Add(item);
+            }
+        }
+
+        private ArrayList GetClassList()
+        {
+            ArrayList classList = new ArrayList();
             using (SqlConnection con = new SqlConnection(connection_string))
             {
                 con.Open();
@@ -39,9 +51,11 @@ namespace Quiz_Web_App
                 ViewState["ClassTable"] = dataTable;
                 for (int i = 0; i < dataTable.Rows.Count - 1; i++)
                 {
-                    dataTable.Rows[i][""]
-                }
+                    classList.Add(new ListItem(dataTable.Rows[i]["class_name"].ToString(), dataTable.Rows[i]["class_id"].ToString()));
                     
+                }
+                return classList;
+
             }
         }
 
@@ -65,7 +79,8 @@ namespace Quiz_Web_App
                         SqlCommand cmd = new SqlCommand("CreateQuiz", con);
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@QuizID", Convert.ToInt32(hfQuizID.Value == "" ? "0" : hfQuizID.Value));
-                        cmd.Parameters.AddWithValue("", Session["CardID"]);
+                        cmd.Parameters.AddWithValue("@CreatorId", Session["CardID"]);
+                        cmd.Parameters.AddWithValue("@ClassId", dropdown_class.SelectedValue);
                     }
                 }
                 
@@ -87,7 +102,12 @@ namespace Quiz_Web_App
                 ErrorMessage.Visible = true;
                 return false;
             }
-            
+            else if (txt_startDate.Text.Trim() == "")
+            {
+                ErrorMessage.Text = "Start Date should be specified";
+                ErrorMessage.Visible = true;
+                return false;
+            }
             else if (dropdown_class.SelectedValue == "-1")
             {
                 ErrorMessage.Text = "Please select a class!";
