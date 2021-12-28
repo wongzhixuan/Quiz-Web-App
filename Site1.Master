@@ -4,17 +4,29 @@
 
 <html>
 <head runat="server">
-    <link href="/Resources/bs5/css/bootstrap.min.css" rel="stylesheet" type="text/css" runat="server" />
+    <link href="~/Resources/bs5/css/bootstrap.min.css" rel="stylesheet" type="text/css" runat="server" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <link href="Resources/css/main.css" rel="stylesheet" type="text/css" runat="server" />
+    <link href="~/Resources/css/main.css" rel="stylesheet" type="text/css" runat="server" asp-append-version="true"/>
     <title>Quiziva</title>
+    <script type="text/javascript" src="~/Resources/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Resources/js/jquery.sticky.js"></script>
+    <script>
+        $(window).load(function () {
+            $("#sticker").sticky({ topSpacing: 50 });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#sticker").sticky({ topSpacing: 0 });
+        });
+    </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <nav class="navbar navbar-expand-md">
         <div class="navbar-brand">
-            <img src="Resources/Images/quizLogo.png" id="Logo" class="img-fluid" width="50" height="50" /><img src="Resources/Images/Quizva.png" height="30" />
+            <img src="Resources/Images/baseline_lightbulb_outline_black_24dp.png" id="Logo" class="img-fluid" width="50" height="50" /><img src="Resources/Images/Quizva.png" height="30" />
         </div>
         <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
             <span class="navbar-toggle-icon"></span>
@@ -29,14 +41,14 @@
             </ul>
         </div>
     </nav>
-    <div class="container green_container">
+    
         <form id="form1" runat="server">
             <div>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
         </form>
-    </div>
+
     <footer class="page-footer">
 
         <div class="footer-copywrite text-center">@ 2021 Copyright Quiziva</div>

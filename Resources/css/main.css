@@ -50,16 +50,18 @@ body {
     background-color: darkslategrey;
     border-radius: 5px;
     margin: 2em 2em 0em 2em;
-    padding: 2em 4em 0 4em;
+    padding: 2em 2em 0 2em;
 }
 
 .content-container {
     background: #fff;
     height: 1000px;
-    margin: 4em 4em 0em 4em;
+    margin: 4em 2em 0em 2em;
     padding: 2em;
     position: relative;
     border-radius: 5px;
+    scroll-behavior: smooth;
+    overflow:scroll;
 }
 .page-footer {
     background-color: #222;
@@ -70,4 +72,90 @@ body {
 .footer-copyright {
     color: #666;
     padding: 40px 0;
+}
+
+.rightcolumn {
+    float: right;
+    width: 25%;
+    padding-left: 20px;
+}
+.panel {
+    margin: 10px 0px 0px 0px;
+    width: 300px;
+    list-style: none;
+    padding-top: 10px;
+    display: inline-block;
+}
+
+    .panel li {
+        border-radius: 3px 3px 3px 3px;
+        margin-top: 5px;
+        width: 250px;
+        background: #000000;
+        background: -moz-linear-gradient(top, #161616 0%, #000000 100%);
+        background: -webkit-linear-gradient(top, #161616 0%,#000000 100%);
+        background: -o-linear-gradient(top, #161616 0%,#000000 100%);
+        border-left: 1px solid #111;
+        border-top: 1px solid #111;
+        border-right: 1px solid #333;
+        border-bottom: 1px solid #333;
+    }
+
+    .panel h3 {
+        font-family: 'Oxygen Mono', monospace;
+        color: #FFFFFF;
+        margin: 5px 20px 5px 20px;
+        font-size: 23px;
+    }
+
+    .panel li a {
+        color: #fff;
+        font-size: 20px;
+        font-family: 'Oxygen Mono', monospace;
+        display: block;
+        padding: 10px;
+    }
+
+        .panel li a:hover {
+            color: #00c6ff;
+        }
+
+    .panel .animation {
+        -moz-transition: all 0.4s ease-in-out;
+        -moz-transform: translateX(0px);
+        -o-transition: all 0.4s ease-in-out;
+        -o-transform: translateX(0px);
+        -webkit-transition: all 0.4s ease-in-out;
+        -webkit-transform: translateX(0px);
+    }
+
+        .panel .animation:hover {
+            -moz-transform: translateX(25px);
+            -o-transform: translateX(25px);
+            -webkit-transform: translateX(25px);
+        }
+
+.btn_details {
+    border-radius: 5px;
+    height: 50px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+   
+.class-table{
+    margin:2em auto;
+}
+.feature-title {
+    color: #333;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin:2em auto 2em auto;
+
+}
+.form-group{
+    margin:2em;
+    
 }

@@ -93,14 +93,18 @@
     <Content Include="Resources\bs5\js\bootstrap.js" />
     <Content Include="Resources\bs5\js\bootstrap.min.js" />
     <Content Include="Resources\css\main.css" />
+    <Content Include="Resources\Images\baseline_lightbulb_outline_black_24dp.png" />
     <Content Include="Resources\Images\quizLogo.png" />
     <Content Include="Resources\Images\Quizva.png" />
     <Content Include="Resources\Images\Shinsen-gumi.png" />
     <Content Include="StudentsMenu.aspx" />
     <Content Include="StudentsProfile.aspx" />
     <Content Include="TeachersProfile.aspx" />
+    <Content Include="Resources\js\jquery.sticky.js" />
     <Content Include="Web.config" />
     <Content Include="TeachersMenu.aspx" />
+    <Content Include="Manage Class.aspx" />
+    <Content Include="CreateClass.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Login.aspx.cs">
@@ -159,6 +163,20 @@
     </Compile>
     <Compile Include="TeachersProfile.aspx.designer.cs">
       <DependentUpon>TeachersProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage Class.aspx.cs">
+      <DependentUpon>Manage Class.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage Class.aspx.designer.cs">
+      <DependentUpon>Manage Class.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateClass.aspx.cs">
+      <DependentUpon>CreateClass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateClass.aspx.designer.cs">
+      <DependentUpon>CreateClass.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
