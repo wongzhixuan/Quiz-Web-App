@@ -83,7 +83,7 @@ namespace Quiz_Web_App
                     String id = Session["CardID"].ToString();
                     int classID = Convert.ToInt32(dropdown_class.SelectedValue.ToString());
                     String descrip = txt_description.Text.Trim().ToString();
-                    int score = Convert.ToInt32(txt_score.Text.Trim().ToString());
+                    int score = int.Parse(txt_score.Text.Trim().ToString());
                     DateTime start_date = DateTime.Parse(txt_startDate.Text);
                     DateTime end_date = DateTime.Parse(txt_endDate.Text);
                     using (SqlConnection con = new SqlConnection(connection_string))
@@ -101,16 +101,19 @@ namespace Quiz_Web_App
                         cmd.Parameters.AddWithValue("@FinishedDate", end_date);
 
                         int quizID = 0;
-                        quizID = Convert.ToInt32(cmd.ExecuteScalar());
+                        quizID = int.Parse(cmd.ExecuteScalar().ToString());
                         
                         con.Close();
                         if (quizID > 0)
                         {
+                            ViewState["totalScore"] = score;
                             ViewState["quizID"] = quizID;
-                            SuccessMessage.Text = "Your Quiz is Created Successfully. ";
+                            SuccessMessage.Text = "Your Quiz is Created Successfully. " ;
                             SuccessMessage.Visible = true;
+                            ErrorMessage.Visible = false;
                             create_quiz.Enabled = false;
                             add_ques.Enabled = true;
+                            create_quiz.Click -= create_quiz_Click;
                         }
                         else
                         {
@@ -119,6 +122,7 @@ namespace Quiz_Web_App
                         }
 
                     }
+                    create_quiz.Click -= create_quiz_Click;
                 }
                 
             }
@@ -127,6 +131,7 @@ namespace Quiz_Web_App
 
         private bool validateInputs()
         {
+            // Important fields cannot be empty
             if(txt_title.Text.Trim() == "")
             {
                 ErrorMessage.Text = "Quiz Title should not be empty";
@@ -158,6 +163,26 @@ namespace Quiz_Web_App
                 ErrorMessage.Visible = true;
                 return false;
             }
+            // The score should be in positive integer and not 0
+            else if (int.Parse(txt_score.Text) <= 0)
+            {
+                ErrorMessage.Text = "The Score should be greater than 0.";
+                ErrorMessage.Visible = true;
+                return false;
+            }
+            // the start date should be after the current time
+            else if (DateTime.Parse(txt_startDate.Text) < DateTime.Now)
+            {
+                ErrorMessage.Text = "The start time should not be set to past time.";
+                ErrorMessage.Visible = true;
+                return false;
+            }
+            // the end date should be at least 10 min after start date
+            else if (DateTime.Parse(txt_endDate.Text) < DateTime.Parse(txt_startDate.Text).AddMinutes(10)){
+                ErrorMessage.Text = "The end time should be at least 10 mins after start date.";
+                ErrorMessage.Visible = true;
+                return false;
+            }
             else
             {
                 return true;
@@ -169,11 +194,14 @@ namespace Quiz_Web_App
         protected void add_ques_Click(object sender, EventArgs e)
         {
            
-            if (ViewState["quizID"] != null)
+            if (ViewState["quizID"] != null && ViewState["totalScore"] != null)
             {
-                int quizID = Convert.ToInt32(ViewState["quizID"]);
+                int score = int.Parse(ViewState["totalScore"].ToString());
+                int quizID = int.Parse(ViewState["quizID"].ToString());
                 HttpCookie httpCookie = new HttpCookie("quizInformation");
                 httpCookie["quizID"] = quizID.ToString();
+                httpCookie["totalScore"] = score.ToString();
+
                 Response.Cookies.Add(httpCookie);
                 Response.Redirect("~/CreateQuiz-Question.aspx");
 

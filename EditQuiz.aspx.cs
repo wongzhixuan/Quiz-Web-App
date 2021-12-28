@@ -17,7 +17,7 @@ namespace Quiz_Web_App
                 HttpCookie quizcookie = Request.Cookies["quizInfo"];
                 if(quizcookie != null)
                 {
-                    quizID = quizcookie["quizID"].ToString();
+                    ViewState["quizID"] = quizcookie["quizID"].ToString();
                 }
                 
             }

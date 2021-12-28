@@ -60,8 +60,9 @@
                     <asp:Label ID="Label6" runat="server" Text="Please select the date and time for the quiz to end." CssClass="form-text text-muted"></asp:Label>
                 </div>
                 <div class="form-group">
+                    <asp:Button ID="add_ques" runat="server" Text="Add Questions >" CssClass="btn btn-primary btn_details float-end" OnClick="add_ques_Click" UseSubmitBehavior="false" OnClientClick="this.disabled='true' ; this.value= 'Please Wait..'" Enabled="False" />
                     <asp:Button ID="create_quiz" runat="server" Text="Create Quiz" CssClass="btn btn-primary btn_details float-end" OnClick="create_quiz_Click" UseSubmitBehavior="false" OnClientClick="this.disabled='true' ; this.value= 'Please Wait..'" />
-                    <asp:Button ID="add_ques" runat="server" Text="Add Questions" CssClass="btn btn-primary btn_details float-end" OnClick="add_ques_Click" UseSubmitBehavior="false" OnClientClick="this.disabled='true' ; this.value= 'Please Wait..'" Enabled="False" />
+                    
                 </div>
                 <asp:Label ID="SuccessMessage" runat="server" Text="" CssClass="alert alert-success alert-dismissible fade show" Visible="false"></asp:Label>
                 <br />

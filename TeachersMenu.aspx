@@ -4,6 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%-- The side menu container--%>
     <div class="rightcolumn">
                 <div id="sticker">
                     <nav>
@@ -21,6 +22,8 @@
                     </nav>
                 </div>
             </div>
+
+    <%-- The Main Content Container--%>
     <div class="container green_container">
     <div class="content-container">
         <asp:Label ID="lblCardID" runat="server" />
@@ -28,7 +31,7 @@
     </div>
         </div>
         <asp:Button ID="profileBtn" runat="server" Text="Edit Profile" onclick="profileBtn_Click"/>
-    </div>
+    
 
 
 </asp:Content>

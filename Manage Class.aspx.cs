@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
+using System.Collections;
 
 namespace Quiz_Web_App
 {
@@ -114,12 +115,40 @@ namespace Quiz_Web_App
 
         protected void class_view_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int id = Convert.ToInt16(class_view.DataKeys[e.RowIndex].Values["class_id"].ToString());
-            class_delete(id);
+            int id = int.Parse(class_view.DataKeys[e.RowIndex].Values["class_id"].ToString());
+            if (checkDeletePermission(id))
+            {
+                class_delete(id);
+            }
+            
             getData();
         }
+        // Still editing don't run
+        private bool checkDeletePermission(int id)
+        {
+            ArrayList classList = new ArrayList();
+            using (SqlConnection sqlcon = new SqlConnection(connection_string))
+            {
+                sqlcon.Open();
+                SqlCommand cmd = new SqlCommand("SELECT ClassId FROM Quiz GROUP BY ClassId ", sqlcon);
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+                sqlcon.Close();
+                ViewState["ClassTable"] = dataTable;
+                for (int i = 0; i < dataTable.Rows.Count - 1; i++)
+                {
+                    classList.Add(new ListItem(dataTable.Rows[i]["ClassId"].ToString()));
 
-        
+                }
+                
+            }
+            return true;
+
+
+
+        }
 
         protected void class_view_RowEditing(object sender, GridViewEditEventArgs e)
         {

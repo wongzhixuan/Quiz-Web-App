@@ -186,15 +186,6 @@ namespace Quiz_Web_App
         protected global::System.Web.UI.WebControls.Label Label6;
 
         /// <summary>
-        /// create_quiz control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button create_quiz;
-
-        /// <summary>
         /// add_ques control.
         /// </summary>
         /// <remarks>
@@ -202,6 +193,15 @@ namespace Quiz_Web_App
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button add_ques;
+
+        /// <summary>
+        /// create_quiz control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button create_quiz;
 
         /// <summary>
         /// SuccessMessage control.
