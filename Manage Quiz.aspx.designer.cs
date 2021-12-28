@@ -11,26 +11,26 @@ namespace Quiz_Web_App
 {
 
 
-    public partial class WebForm2
+    public partial class WebForm4
     {
 
         /// <summary>
-        /// createClass control.
+        /// createQuiz control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button createClass;
+        protected global::System.Web.UI.WebControls.Button createQuiz;
 
         /// <summary>
-        /// class_view control.
+        /// quiz_view control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView class_view;
+        protected global::System.Web.UI.WebControls.GridView quiz_view;
 
         /// <summary>
         /// SuccessMessage control.

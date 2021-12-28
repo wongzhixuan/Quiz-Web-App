@@ -1,6 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="TeachersMenu.aspx.cs" Inherits="Quiz_Web_App.WebForm1" %>
-
-<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="TeachersMenu.aspx.cs" Inherits="Quiz_Web_App.TeachersMenu" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="CreateQuiz.aspx.cs" Inherits="Quiz_Web_App.WebForm5" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -22,13 +20,9 @@
                 </div>
             </div>
     <div class="container green_container">
-    <div class="content-container">
-        <asp:Label ID="lblCardID" runat="server" />
-        
-    </div>
+        <div class="content-container">
+            
+
+            </div>
         </div>
-        <asp:Button ID="profileBtn" runat="server" Text="Edit Profile" onclick="profileBtn_Click"/>
-    </div>
-
-
 </asp:Content>
