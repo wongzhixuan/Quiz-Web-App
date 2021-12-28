@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="AttemptQuiz.aspx.cs" Inherits="Quiz_Web_App.AttemptQuiz" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeFile="AttemptQuiz.aspx.cs" Inherits="Quiz_Web_App.AttemptQuiz" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+        <div class="container green_container">
+            <div class="content-container">
             <center>
                 <asp:Repeater ID="Repeater1" runat="server">
                     <ItemTemplate>
@@ -14,15 +14,12 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:RadioButtonList ID="rbl1" runat="server">
-                                        <asp:ListItem Value="Op1" Text='<%#Eval("Option1") %>' GroupName="q1"/>
-                                        <asp:ListItem Value="Op2" Text='<%#Eval("Option2") %>' GroupName="q1"/>
-                                        <asp:ListItem Value="Op3" Text='<%#Eval("Option3") %>' GroupName="q1"/>
-                                        <asp:ListItem Value="Op4" Text='<%#Eval("Option4") %>' GroupName="q1"/>
-                                    </asp:RadioButtonList>
+                                    <asp:RadioButton ID="Op1" runat="server" Text='<%#Eval("Option1") %>' GroupName="q1"/>
+                                    <asp:RadioButton ID="Op2" runat="server" Text='<%#Eval("Option2") %>' GroupName="q1"/>
+                                    <asp:RadioButton ID="Op3" runat="server" Text='<%#Eval("Option3") %>' GroupName="q1"/>
+                                    <asp:RadioButton ID="Op4" runat="server" Text='<%#Eval("Option4") %>' GroupName="q1"/>
                                     
                                     <br />
-                                    <asp:Label ID="LabCorrectAns" runat="server" Text='<%#Eval("AnsId") %>' Visible="false"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
@@ -35,6 +32,6 @@
                 </asp:Repeater>
                 <asp:Button ID="BtnSubmit" runat="server" Text="Submit" OnClick="BtnSubmit_Click"/>
             </center>
-
+            </div>
         </div>
 </asp:Content>
