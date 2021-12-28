@@ -92,6 +92,8 @@
     <Content Include="Resources\bs5\js\bootstrap.esm.min.js" />
     <Content Include="Resources\bs5\js\bootstrap.js" />
     <Content Include="Resources\bs5\js\bootstrap.min.js" />
+    <Content Include="Resources\css\LoginChoice.css" />
+    <Content Include="Resources\css\LoginRegister.css" />
     <Content Include="Resources\css\main.css" />
     <Content Include="Resources\Images\baseline_lightbulb_outline_black_24dp.png" />
     <Content Include="Resources\Images\quizLogo.png" />
