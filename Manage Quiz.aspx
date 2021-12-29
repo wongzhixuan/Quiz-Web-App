@@ -13,7 +13,7 @@
                             <li class="animation"><a href="TeachersMenu.aspx">Dashboard</a></li>
                             <li class="animation"><a href="Manage Class.aspx">Manage Class</a></li>
                             <li class="animation"><a href="Manage Quiz.aspx">Manage Quiz</a></li>
-                            <li class="animation" style="margin-top: 5px"><a href="#Student">Manage Students </a></li>
+                            <li class="animation" style="margin-top: 5px"><a href="#Student">Student Grades</a></li>
 
                         </ul>
                     </nav>
@@ -49,10 +49,10 @@
                                     <asp:Label ID="Description" runat="server" Text='<%# Bind("Description") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Score" SortExpression="Score">
+                            <asp:TemplateField HeaderText="Class" SortExpression="class_name">
                                 
                                 <ItemTemplate>
-                                    <asp:Label ID="Class" runat="server" Text='<%# Bind("class_name") %>'</asp:Label>
+                                    <asp:Label ID="Class" runat="server" Text='<%# Bind("class_name") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Score" SortExpression="Score">

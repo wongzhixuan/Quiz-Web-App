@@ -16,7 +16,7 @@
                             <li class="animation"><a href="TeachersMenu.aspx">Dashboard</a></li>
                             <li class="animation"><a href="Manage Class.aspx">Manage Class</a></li>
                             <li class="animation"><a href="Manage Quiz.aspx">Manage Quiz</a></li>
-                            <li class="animation" style="margin-top: 5px"><a href="#Student">Manage Students </a></li>
+                            <li class="animation" style="margin-top: 5px"><a href="#Student">Student Grades</a></li>
 
                         </ul>
                     </nav>
@@ -27,10 +27,12 @@
     <div class="container green_container">
     <div class="content-container">
         <asp:Label ID="lblCardID" runat="server" />
-        
+        <center>
+        <asp:Button ID="profileBtn" runat="server" Text="View Profile" onclick="profileBtn_Click" CssClass="btn btn-primary" Font-Size="XX-Large" />
+            </center>
     </div>
         </div>
-        <asp:Button ID="profileBtn" runat="server" Text="View Profile" onclick="profileBtn_Click"/>
+        
 
 
 </asp:Content>

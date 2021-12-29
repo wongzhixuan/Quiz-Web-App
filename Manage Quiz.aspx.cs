@@ -62,6 +62,7 @@ namespace Quiz_Web_App
             }
             else
             {
+                SuccessMessage.Visible = false;
                 ErrorMessage.Visible = true;
                 ErrorMessage.Text = "Cannot delete selected rows as there are something depending on it!";
             }
@@ -117,6 +118,7 @@ namespace Quiz_Web_App
             }
             else
             {
+                SuccessMessage.Visible = false;
                 ErrorMessage.Text = "Quiz Delete Failed";
                 ErrorMessage.Visible = true;
             }
@@ -205,6 +207,7 @@ namespace Quiz_Web_App
         }
         private bool validateInputs(string txt_title, string txt_score, string txt_startDate, string txt_endDate)
         {
+            SuccessMessage.Visible = false;
             // Important fields cannot be empty
             if (txt_title == "")
             {

@@ -159,3 +159,17 @@ body {
     margin:2em;
     
 }
+.table_custom {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    width: 350px;
+}
+    .table_custom th {
+        background-color: #F7F7F7;
+        color: #333;
+        font-weight: bold;
+    }
+        .table_custom th td {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }

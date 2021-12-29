@@ -117,6 +117,7 @@ namespace Quiz_Web_App
                         }
                         else
                         {
+                            SuccessMessage.Visible = false;
                             ErrorMessage.Text = "Quiz Create Failed.";
                             ErrorMessage.Visible = true;
                         }
@@ -131,8 +132,9 @@ namespace Quiz_Web_App
 
         private bool validateInputs()
         {
+            SuccessMessage.Visible = false;
             // Important fields cannot be empty
-            if(txt_title.Text.Trim() == "")
+            if (txt_title.Text.Trim() == "")
             {
                 ErrorMessage.Text = "Quiz Title should not be empty";
                 ErrorMessage.Visible = true;

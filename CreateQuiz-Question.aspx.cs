@@ -270,6 +270,7 @@ namespace Quiz_Web_App
                         int totalScore = int.Parse(ViewState["totalScore"].ToString());
                         if(totalScore != currentScore)
                         {
+                            SuccessMessage.Visible = false;
                             ErrorMessage.Text = "Error! Total score of all question must match the total score of entire quiz";
                             ErrorMessage.Visible = true;
                         }
@@ -357,8 +358,10 @@ namespace Quiz_Web_App
 
         private bool validateInputs(TextBox box_title, TextBox box_score, TextBox box_op1, TextBox box_op2, TextBox box_op3, TextBox box_op4, DropDownList dropdown_ans)
         {
+            SuccessMessage.Visible = false;
             if (box_title.Text == "" || box_score.Text == "" || box_op1.Text == "" || box_op2.Text == "" || box_op3.Text == "" || box_op4.Text == "" || dropdown_ans.SelectedValue == "-1")
             {
+
                 ErrorMessage.Visible = true;
                 ErrorMessage.Text = "Please ensure to fill in every fields!";
                 return false;
