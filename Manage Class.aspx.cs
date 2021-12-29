@@ -66,6 +66,7 @@ namespace Quiz_Web_App
                 }
                 else
                 {
+                    SuccessMessage.Visible = false;
                     ErrorMessage.Text = "Class Update Failed";
                     ErrorMessage.Visible = true;
                 }
@@ -90,6 +91,7 @@ namespace Quiz_Web_App
             }
             else
             {
+                SuccessMessage.Visible = false;
                 ErrorMessage.Text = "Class Delete Failed";
                 ErrorMessage.Visible = true;
             }
@@ -128,6 +130,7 @@ namespace Quiz_Web_App
             }
             else
             {
+                SuccessMessage.Visible = false;
                 ErrorMessage.Visible = true;
                 ErrorMessage.Text = "Cannot delete selected rows as there are something depending on it!";
             }
@@ -224,6 +227,14 @@ namespace Quiz_Web_App
             class_view.PageIndex = e.NewPageIndex;
             class_view.DataSource = ViewState["Paging"];
             class_view.DataBind();
+        }
+
+        protected void class_view_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+        {
+            HttpCookie classCookie = new HttpCookie("classInfo");
+            classCookie["classId"] = class_view.DataKeys[e.NewSelectedIndex].Values["class_id"].ToString();
+            Response.Cookies.Add(classCookie);
+            Response.Redirect("ManageClassStudent.aspx");
         }
     }
 }

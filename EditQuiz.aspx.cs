@@ -88,6 +88,8 @@ namespace Quiz_Web_App
             }
             else
             {
+                SuccessMessage.Visible = false;
+
                 ErrorMessage.Text = "Question Delete Failed";
                 ErrorMessage.Visible = true;
             }
@@ -153,6 +155,7 @@ namespace Quiz_Web_App
                 }
                 else
                 {
+                    SuccessMessage.Visible = false;
                     ErrorMessage.Text = "Question Update Failed";
                     ErrorMessage.Visible = true;
                 }

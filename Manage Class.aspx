@@ -14,7 +14,7 @@
                     <li class="animation"><a href="TeachersMenu.aspx">Dashboard</a></li>
                     <li class="animation"><a href="Manage Class.aspx">Manage Class</a></li>
                     <li class="animation"><a href="Manage Quiz.aspx">Manage Quiz</a></li>
-                    <li class="animation" style="margin-top: 5px"><a href="#Student">Manage Students </a></li>
+                    <li class="animation" style="margin-top: 5px"><a href="#Student">Student Grades</a></li>
 
                 </ul>
             </nav>
@@ -29,7 +29,7 @@
                 <center>
                     <asp:Label runat="server" Text="Class List" Font-Bold="True" Font-Size="Larger" CssClass=" feature-title"></asp:Label>
 
-                    <asp:GridView runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" ID="class_view" DataKeyNames="class_id" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CssClass="table " OnRowCancelingEdit="class_view_RowCancelingEdit" OnRowUpdating="class_view_RowUpdating"  OnRowDeleting="class_view_RowDeleting" OnRowEditing="class_view_RowEditing" OnSorting="class_view_Sorting" OnPageIndexChanging ="class_view_PageIndexChanging" >
+                    <asp:GridView runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" ID="class_view" DataKeyNames="class_id" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CssClass="table " OnRowCancelingEdit="class_view_RowCancelingEdit" OnRowUpdating="class_view_RowUpdating"  OnRowDeleting="class_view_RowDeleting" OnRowEditing="class_view_RowEditing" OnSorting="class_view_Sorting" OnPageIndexChanging ="class_view_PageIndexChanging" OnSelectedIndexChanging="class_view_SelectedIndexChanging" >
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
 
                         <Columns>
@@ -62,6 +62,7 @@
                             <asp:CommandField ButtonType="Button" ShowDeleteButton="True"  ControlStyle-CssClass="btn btn-primary">
 <ControlStyle CssClass="btn btn-primary"></ControlStyle>
                             </asp:CommandField>
+                            <asp:ButtonField CommandName="Select" Text="Students" />
                         </Columns>
 
                         <EditRowStyle BackColor="#999999" />
