@@ -96,15 +96,6 @@ namespace Quiz_Web_App
         protected global::System.Web.UI.WebControls.DropDownList ddlUserType;
 
         /// <summary>
-        /// backBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button backBtn;
-
-        /// <summary>
         /// registerBtn control.
         /// </summary>
         /// <remarks>
@@ -114,21 +105,12 @@ namespace Quiz_Web_App
         protected global::System.Web.UI.WebControls.Button registerBtn;
 
         /// <summary>
-        /// lblSuccessMessage control.
+        /// backBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSuccessMessage;
-
-        /// <summary>
-        /// lblErrorMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorMessage;
+        protected global::System.Web.UI.WebControls.Button backBtn;
     }
 }

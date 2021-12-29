@@ -30,8 +30,7 @@
         
     </div>
         </div>
-        <asp:Button ID="profileBtn" runat="server" Text="Edit Profile" onclick="profileBtn_Click"/>
-    
+        <asp:Button ID="profileBtn" runat="server" Text="View Profile" onclick="profileBtn_Click"/>
 
 
 </asp:Content>

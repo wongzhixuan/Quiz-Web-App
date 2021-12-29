@@ -1,0 +1,49 @@
+﻿.centerwindow {
+    width: 720px;
+    height: 470px;
+    margin: 75px auto 75px auto;
+    padding: 50px;
+    position: relative;
+    border-radius: 20px;
+    background-color: #ffdd6a;
+}
+
+.title p {
+    font-size: 52px;
+    text-align: center;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: 800;
+    margin: 30px;
+
+}
+
+.titledesc p {
+    font-size: 24px;
+    text-align: center;
+    font-family: 'Gill Sans MT', serif;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+form .button {
+    width: 450px;
+    height: 70px;
+    background-color: #ffb600;
+    margin-top: 25px;
+    border-radius: 35px;
+    font-family: 'Arial', sans-serif;
+    font-size: 26px;
+    border: 0px;
+    transition: 0.3s;
+}
+
+form .button:hover {
+    width: 450px;
+    height: 70px;
+    background-color: #ff8b00;
+    margin-top: 25px;
+    border-radius: 35px;
+    font-family: 'Arial', sans-serif;
+    font-size: 35px;
+    border: 0px;
+}

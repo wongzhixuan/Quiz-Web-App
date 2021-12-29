@@ -11,7 +11,7 @@ namespace Quiz_Web_App
 {
     public partial class Login : System.Web.UI.Page
     {
-        string connectionString = @"Data Source=LAPTOP-R7G5DB4N;Initial Catalog=QuizWebsiteDB;Integrated Security=True";
+        string connectionString = @"Data Source=MAIKE\SQL2019;Initial Catalog=QuizApp;Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -29,8 +29,7 @@ namespace Quiz_Web_App
         {
             if (txtCardID.Text == "" || txtPassword.Text == "")
             {
-                lblErrorMessage.Text = "";
-                lblErrorMessage.Text = "Mandatory Fields Are Still Empty!";
+                Response.Write("<script>alert('Please Fill In All Mandatory Sections!');</script>");
             }
             else
             {
@@ -61,8 +60,8 @@ namespace Quiz_Web_App
                     else
                     {
                         ClearTextBox();
-                        lblErrorMessage.Text = "Wrong User Credentials!";
-                        
+                        Response.Write("<script>alert('Wrong User Credentials. Please Try Again!');</script>");
+
                     }
                 }
             }
@@ -73,8 +72,7 @@ namespace Quiz_Web_App
 
         void ClearTextBox()
         {
-            txtCardID.Text = txtPassword.Text = "";
-            lblErrorMessage.Text = "";
+            txtCardID.Text = txtPassword.Text = " ";
         }
     }
 }
