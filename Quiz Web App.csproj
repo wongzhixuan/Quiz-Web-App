@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AttemptQuiz.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="LoginChoice.aspx" />
     <Content Include="Register.aspx" />
@@ -113,6 +114,12 @@
     <Content Include="ManageClassStudent.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttemptQuiz.aspx.cs">
+      <DependentUpon>AttemptQuiz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AttemptQuiz.aspx.designer.cs">
+      <DependentUpon>AttemptQuiz.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
