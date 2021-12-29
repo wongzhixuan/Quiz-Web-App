@@ -6,7 +6,7 @@
 <head runat="server">
     <link href="~/Resources/bs5/css/bootstrap.min.css" rel="stylesheet" type="text/css" runat="server" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <link href="~/Resources/css/main.css" rel="stylesheet" type="text/css" runat="server" asp-append-version="true"/>
+    <link href="~/Resources/css/main.css" rel="stylesheet" type="text/css" runat="server" asp-append-version="true" />
     <title>Quiziva</title>
     <script type="text/javascript" src="~/Resources/js/jquery.min.js"></script>
     <script type="text/javascript" src="~/Resources/js/jquery.sticky.js"></script>
@@ -32,22 +32,25 @@
             <span class="navbar-toggle-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="#main-navigation">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="LoginChoice.aspx">Home</a>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-            </ul>
-        </div>
+                        <li class="nav-item">
+
+                            
+                    </ul>
+                </div>
+        
+
     </nav>
-    
-        <form id="form1" runat="server">
-            <div>
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                </asp:ContentPlaceHolder>
-            </div>
-        </form>
+
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
 
     <footer class="page-footer">
 
