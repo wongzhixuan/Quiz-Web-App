@@ -39,7 +39,7 @@ namespace Quiz_Web_App
                 ViewState["ClassTable"] = dataTable;
                 for (int i = 0; i < dataTable.Rows.Count - 1; i++)
                 {
-                    dataTable.Rows[i][""];
+                    _ = dataTable.Rows[i][""];
                 }
                     
             }
