@@ -16,68 +16,117 @@ namespace Quiz_Web_App
 
         protected void Page_Load(object sender, System.EventArgs e)
         {
-            if (IsPostBack == false)
+            if (!Page.IsPostBack)
                 BindGrid();
         }
 
         public void BindGrid()
         {
             SqlConnection sqlconn = new SqlConnection(mainconn);
-            string sqlquery = "SELECT q.Ques_id, q.Title, q.Score, o.Option1, o.Option2, o.Option3, o.Option4 FROM Quiz_question q INNER JOIN Quiz_option AS o ON q.Ques_id = o.Ques_id INNER JOIN Quiz_ans AS a ON q.Ques_id = a.QuesId";
+            string sqlquery = "SELECT q.Ques_id, q.Title, q.Score, o.Option1, o.Option2, o.Option3, o.Option4, a.AnsId FROM Quiz_question q INNER JOIN Quiz_option AS o ON q.Ques_id = o.Ques_id INNER JOIN Quiz_ans AS a ON q.Ques_id = a.QuesId";
             sqlconn.Open();
             SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
             SqlDataAdapter da = new SqlDataAdapter(sqlcomm);
             DataTable dt = new DataTable ();
             da.Fill(dt);
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
+            Repeater1.DataSource = dt;
+            Repeater1.DataBind();
             sqlconn.Close();
         }
 
         protected void BtnSubmit_Click(object sender, EventArgs e)
         {
-            int quesid;
-            int ansid;
-
-            for (int i = 0; i < GridView1.Rows.Count; i++)
+            foreach (RepeaterItem ri in Repeater1.Items)
             {
-                if (Op1.Checked)
+                RadioButton rb1 = (RadioButton)ri.FindControl("Op1");
+                Label CorrectAnswer = (Label)ri.FindControl("CorrectAns");
+                if (rb1.Checked == true)
                 {
-                    quesid = i + 1;
-                    ansid = '1';
-                }
-                else if (Op2.Checked)
-                {
-                    quesid = i + 1;
-                    ansid = '2';
-                }
-                else if (Op3.Checked)
-                {
-                    quesid = i + 1;
-                    ansid = '3';
-                }
-                else if (Op4.Checked)
-                {
-                    quesid = i + 1;
-                    ansid = '4';
-                }
-                else
-                {
-                    quesid = i + 1;
-                    ansid = '0';
-                }
-                string cmd = "insert into Student_ans values(@QuesID,@AnsID)";
-                using (SqlConnection sqlconn = new SqlConnection(mainconn))
-                {
-                    using (SqlCommand sqlcomm = new SqlCommand(cmd, sqlconn))
+                    if (rb1.ID.Equals(CorrectAnswer.Text))
                     {
-                        sqlcomm.Parameters.AddWithValue("@QuesID",quesid);
-                        sqlcomm.Parameters.AddWithValue("@AnsID",ansid);
-
-                        sqlconn.Open();
-                        sqlcomm.ExecuteNonQuery();
-                        sqlconn.Close();
+                        Label Result = (Label)ri.FindControl("SelectedAns");
+                        Result.Text = "The Selected Option is Correct";
+                        Result.ForeColor = System.Drawing.Color.Green;
                     }
+                    else
+                    {
+                        Label Result = (Label)ri.FindControl("SelectedAns");
+                        Result.Text = "The Selected Option is Incorrect";
+                        Result.ForeColor = System.Drawing.Color.Red;
+                    }
+                }
+            }
+            foreach (RepeaterItem ri in Repeater1.Items)
+            {
+                RadioButton rb2 = (RadioButton)ri.FindControl("Op2");
+                Label CorrectAnswer = (Label)ri.FindControl("CorrectAns");
+                if (rb2.Checked == true)
+                {
+                    if (rb2.ID.Equals(CorrectAnswer.Text))
+                    {
+                        Label Result = (Label)ri.FindControl("SelectedAns");
+                        Result.Text = "The Selected Option is Correct";
+                        Result.ForeColor = System.Drawing.Color.Green;
+                    }
+                    else
+                    {
+                        Label Result = (Label)ri.FindControl("SelectedAns");
+                        Result.Text = "The Selected Option is Incorrect";
+                        Result.ForeColor = System.Drawing.Color.Red;
+                    }
+                }
+            }
+            foreach (RepeaterItem ri in Repeater1.Items)
+            {
+                RadioButton rb3 = (RadioButton)ri.FindControl("Op3");
+                Label CorrectAnswer = (Label)ri.FindControl("CorrectAns");
+                if (rb3.Checked == true)
+                {
+                    if (rb3.ID.Equals(CorrectAnswer.Text))
+                    {
+                        Label Result = (Label)ri.FindControl("SelectedAns");
+                        Result.Text = "The Selected Option is Correct";
+                        Result.ForeColor = System.Drawing.Color.Green;
+                    }
+                    else
+                    {
+                        Label Result = (Label)ri.FindControl("SelectedAns");
+                        Result.Text = "The Selected Option is Incorrect";
+                        Result.ForeColor = System.Drawing.Color.Red;
+                    }
+                }
+            }
+            foreach (RepeaterItem ri in Repeater1.Items)
+            {
+                RadioButton rb4 = (RadioButton)ri.FindControl("Op4");
+                Label CorrectAnswer = (Label)ri.FindControl("CorrectAns");
+                if (rb4.Checked == true)
+                {
+                    if (rb4.ID.Equals(CorrectAnswer.Text))
+                    {
+                        Label Correct = (Label)ri.FindControl("SelectedAns");
+                        Correct.Text = "The Selected Option is Correct";
+                        Correct.ForeColor = System.Drawing.Color.Green;
+                    }
+                    else
+                    {
+                        Label Wrong = (Label)ri.FindControl("SelectedAns");
+                        Wrong.Text = "The Selected Option is Incorrect";
+                        Wrong.ForeColor = System.Drawing.Color.Red;
+                    }
+                }
+            }
+            foreach (RepeaterItem ri in Repeater1.Items)
+            {
+                RadioButton rb1 = (RadioButton)ri.FindControl("Op1");
+                RadioButton rb2 = (RadioButton)ri.FindControl("Op2");
+                RadioButton rb3 = (RadioButton)ri.FindControl("Op3");
+                RadioButton rb4 = (RadioButton)ri.FindControl("Op4");
+                if (rb1.Checked == false && rb2.Checked == false && rb3.Checked == false && rb4.Checked == false)
+                {
+                    Label NoSelected = (Label)ri.FindControl("SelectedAns");
+                    NoSelected.Text = "No Option Was Selected";
+                    NoSelected.ForeColor = System.Drawing.Color.Red;
                 }
             }
         }

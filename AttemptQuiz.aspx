@@ -4,58 +4,37 @@
         <div class="container green_container">
             <div class="content-container">
             <center>
+                <asp:Repeater ID="Repeater1" runat="server">
                     <ItemTemplate>
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" ShowHeader="false" GridLines="None">
-                            <Columns>
-                                <asp:TemplateField HeaderText="Question" >
-                                    <ItemTemplate>
-                                        <tr>
-                                        <hr />
-                                        <asp:Label ID="Qid" runat="server" Width="10px" Text='<%#Eval("Ques_id") %>' />. 
-                                        <asp:Label ID="Question" runat="server" Width="600px" Text='<%#Eval("Title") %>' />
-                                        <hr />
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Option1" >
-                                    <ItemTemplate>
-                                        <tr>
-                                        <hr />
-                                            <asp:RadioButton ID="Op1" runat="server" Width="100px" Text='<%#Eval("Option1") %>' GroupName="Option"/>
-                                        <hr />
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Option2" >
-                                    <ItemTemplate>
-                                        <tr>
-                                        <hr />
-                                            <asp:RadioButton ID="Op2" runat="server" Width="100px" Text='<%#Eval("Option2") %>' GroupName="Option"/>
-                                        <hr />
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Option3" >
-                                    <ItemTemplate>
-                                        <tr>
-                                        <hr />
-                                            <asp:RadioButton ID="Op3" runat="server" Width="100px" Text='<%#Eval("Option3") %>' GroupName="Option"/>
-                                        <hr />
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Option4" >
-                                    <ItemTemplate>
-                                        <tr>
-                                        <hr />
-                                            <asp:RadioButton ID="Op4" runat="server" Width="100px" Text='<%#Eval("Option4") %>' GroupName="Option"/>
-                                        <hr />
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-                        </asp:GridView>
+                        <div class="quiz" style="font-family:Arial">
+                        <table>
+                            <tr>
+                                <td Width="600px">
+                                    <hr />
+                                    <%#Eval("Ques_id") %>. <%#Eval("Title") %>
+                                    <br />
+                                </td>
+                                <td>
+                                    <hr />
+                                    <asp:RadioButton class="radio" runat="server" ID="Op1" Text='<%#Eval("Option1") %>' GroupName="Options"/>
+                                    <asp:RadioButton class="radio" runat="server" ID="Op2" Text='<%#Eval("Option2") %>' GroupName="Options"/>
+                                    <asp:RadioButton class="radio" runat="server" ID="Op3" Text='<%#Eval("Option3") %>' GroupName="Options"/>
+                                    <asp:RadioButton class="radio" runat="server" ID="Op4" Text='<%#Eval("Option4") %>' GroupName="Options"/>
+                                    <br />
+                                    <asp:Label ID="CorrectAns" runat="server" Text='<%#Eval("AnsId") %>' Visible="false"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: center; vertical-align: middle;">
+                                    <br />
+                                    <asp:Label ID="SelectedAns" runat="server" Text=""></asp:Label>
+                                    <br />
+                                </td>
+                            </tr>
+                        </table>
+                        </div>
                     </ItemTemplate>
+                </asp:Repeater>
                 <asp:Button ID="BtnSubmit" runat="server" Text="Submit" OnClick="BtnSubmit_Click"/>
             </center>
             </div>
