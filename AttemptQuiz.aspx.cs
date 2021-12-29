@@ -43,33 +43,33 @@ namespace Quiz_Web_App
             {
                 if (Op1.Checked)
                 {
-                    quesid = i;
+                    quesid = i + 1;
                     ansid = '1';
                 }
                 else if (Op2.Checked)
                 {
-                    quesid = i;
+                    quesid = i + 1;
                     ansid = '2';
                 }
                 else if (Op3.Checked)
                 {
-                    quesid = i;
+                    quesid = i + 1;
                     ansid = '3';
                 }
                 else if (Op4.Checked)
                 {
-                    quesid = i;
+                    quesid = i + 1;
                     ansid = '4';
                 }
                 else
                 {
-                    quesid = i;
+                    quesid = i + 1;
                     ansid = '0';
                 }
-                var cmd = "insert into Student_ans values(@QuesID,@AnsID)";
+                string cmd = "insert into Student_ans values(@QuesID,@AnsID)";
                 using (SqlConnection sqlconn = new SqlConnection(mainconn))
                 {
-                    using (SqlCommand sqlcomm = new SqlCommand(sqlcomm, sqlconn))
+                    using (SqlCommand sqlcomm = new SqlCommand(cmd, sqlconn))
                     {
                         sqlcomm.Parameters.AddWithValue("@QuesID",quesid);
                         sqlcomm.Parameters.AddWithValue("@AnsID",ansid);
