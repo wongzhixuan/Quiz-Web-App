@@ -45,27 +45,32 @@ namespace Quiz_Web_App
         }
         private void class_update(string text1, string text2, int id)
         {
-            SqlConnection sqlConnection = new SqlConnection(connection_string);
-            SqlCommand sqlCommand = new SqlCommand("UpdateClass", sqlConnection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.AddWithValue("@class_id", id);
-            sqlCommand.Parameters.AddWithValue("@class_name", text1);
-            sqlCommand.Parameters.AddWithValue("@class_description", text2);
-            DateTime date = DateTime.Now;
-            sqlCommand.Parameters.AddWithValue("@created_date", date);
-            sqlConnection.Open();
-            int count = sqlCommand.ExecuteNonQuery();
-            sqlConnection.Close();
-            if (count > 0)
+            using (SqlConnection sqlConnection = new SqlConnection(connection_string))
             {
-                SuccessMessage.Text = "Your Class is Updated Successfully";
-                SuccessMessage.Visible = true;
+                
+                SqlCommand sqlCommand = new SqlCommand("UpdateClass", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@class_id", id);
+                sqlCommand.Parameters.AddWithValue("@class_name", text1);
+                sqlCommand.Parameters.AddWithValue("@class_description", text2);
+                DateTime date = DateTime.Now;
+                sqlCommand.Parameters.AddWithValue("@created_date", date);
+                sqlConnection.Open();
+                int count = sqlCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+                if (count > 0)
+                {
+                    ErrorMessage.Visible = false;
+                    SuccessMessage.Text = "Your Class is Updated Successfully";
+                    SuccessMessage.Visible = true;
+                }
+                else
+                {
+                    ErrorMessage.Text = "Class Update Failed";
+                    ErrorMessage.Visible = true;
+                }
             }
-            else
-            {
-                ErrorMessage.Text = "Class Update Failed";
-                ErrorMessage.Visible = true;
-            }
+            
         }
 
         protected void class_delete(int id)
@@ -79,6 +84,7 @@ namespace Quiz_Web_App
             con.Close();
             if (count > 0)
             {
+                ErrorMessage.Visible = false;
                 SuccessMessage.Text = "Your Class is Deleted Successfully";
                 SuccessMessage.Visible = true;
             }
@@ -120,12 +126,18 @@ namespace Quiz_Web_App
             {
                 class_delete(id);
             }
+            else
+            {
+                ErrorMessage.Visible = true;
+                ErrorMessage.Text = "Cannot delete selected rows as there are something depending on it!";
+            }
             
             getData();
         }
-        // Still editing don't run
+        
         private bool checkDeletePermission(int id)
         {
+            bool canDelete = true;
             ArrayList classList = new ArrayList();
             using (SqlConnection sqlcon = new SqlConnection(connection_string))
             {
@@ -137,16 +149,21 @@ namespace Quiz_Web_App
                 sqlDataAdapter.Fill(dataTable);
                 sqlcon.Close();
                 ViewState["ClassTable"] = dataTable;
-                for (int i = 0; i < dataTable.Rows.Count - 1; i++)
+                for (int i = 0; i < dataTable.Rows.Count ; i++)
                 {
-                    classList.Add(new ListItem(dataTable.Rows[i]["ClassId"].ToString()));
-
+                    classList.Add(dataTable.Rows[i]["ClassId"].ToString());
+                }
+                foreach(String item in classList)
+                {
+                    if(int.Parse(item) == id)
+                    {
+                        canDelete = false;
+                    }
+                    
                 }
                 
             }
-            return true;
-
-
+            return canDelete;
 
         }
 

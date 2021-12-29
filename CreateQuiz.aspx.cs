@@ -55,7 +55,7 @@ namespace Quiz_Web_App
                 sqlDataAdapter.Fill(dataTable);
                 con.Close();
                 ViewState["ClassTable"] = dataTable;
-                for (int i = 0; i < dataTable.Rows.Count - 1; i++)
+                for (int i = 0; i < dataTable.Rows.Count ; i++)
                 {
                     classList.Add(new ListItem(dataTable.Rows[i]["class_name"].ToString(), dataTable.Rows[i]["class_id"].ToString()));
                     
@@ -81,7 +81,7 @@ namespace Quiz_Web_App
                 if(validateInputs()){
                     String title = txt_title.Text.Trim().ToString();
                     String id = Session["CardID"].ToString();
-                    int classID = Convert.ToInt32(dropdown_class.SelectedValue.ToString());
+                    int classID = int.Parse(dropdown_class.SelectedValue.ToString());
                     String descrip = txt_description.Text.Trim().ToString();
                     int score = int.Parse(txt_score.Text.Trim().ToString());
                     DateTime start_date = DateTime.Parse(txt_startDate.Text);

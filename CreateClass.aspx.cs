@@ -76,6 +76,7 @@ namespace Quiz_Web_App
                     ClearTextBox();
                     if (class_id > 0)
                     {
+                        ErrorMessage.Visible = false;
                         SuccessMessage.Text = "Your Class is Created Successfully. Class Id :" + class_id + ", " + student_count + "/" + arrayList_count + " students added.";
                         SuccessMessage.Visible = true;
                     }
