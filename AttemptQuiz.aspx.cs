@@ -13,58 +13,69 @@ namespace Quiz_Web_App
     public partial class AttemptQuiz : System.Web.UI.Page
     {
         string mainconn = ConfigurationManager.ConnectionStrings["QuizWebsiteDBConnectionString"].ConnectionString;
-        protected void Page_Load(object sender, EventArgs e)
+
+        protected void Page_Load(object sender, System.EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                SqlConnection sqlconn = new SqlConnection(mainconn);
-                string sqlquery = "SELECT q.Ques_id, q.Title, q.Score, o.Option1, o.Option2, o.Option3, o.Option4 FROM Quiz_question q INNER JOIN Quiz_option AS o ON q.Ques_id = o.Ques_id INNER JOIN Quiz_ans AS a ON q.Ques_id = a.QuesId";
-                sqlconn.Open();
-                SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
-                SqlDataAdapter sdr = new SqlDataAdapter(sqlcomm);
-                DataTable dt = new DataTable();
-                sdr.Fill(dt);
-                Repeater1.DataSource = dt;
-                Repeater1.DataBind();
-                sqlconn.Close();
-            }
+            if (IsPostBack == false)
+                BindGrid();
+        }
+
+
+        public void BindGrid()
+        {
+            SqlConnection sqlconn = new SqlConnection(mainconn);
+            string sqlquery = "SELECT q.Ques_id, q.Title, q.Score, o.Option1, o.Option2, o.Option3, o.Option4 FROM Quiz_question q INNER JOIN Quiz_option AS o ON q.Ques_id = o.Ques_id INNER JOIN Quiz_ans AS a ON q.Ques_id = a.QuesId";
+            sqlconn.Open();
+            SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
+            SqlDataAdapter da = new SqlDataAdapter(sqlcomm);
+            DataTable dt = new DataTable ();
+            da.Fill(dt);
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+            sqlconn.Close();
         }
 
         protected void BtnSubmit_Click(object sender, EventArgs e)
         {
-            int selectedQues = 0;
-            int selectedAns = 0;
-            if (Op1.checked)
-            {
-                selectedQues = '1';
-                selectedAns = '1';
-            }
-            if (Op2.checked)
-            {
-                selectedQues = '1';
-                selectedAns = '1';
-            }
-            if (Op2.checked)
-            {
-                selectedQues = '1';
-                selectedAns = '1';
-            }
-            if (Op2.checked)
-            {
-                selectedQues = '1';
-                selectedAns = '1';
-            }
-            using (SqlConnection con = new SqlConnection(mainconn))
-            {
-                SqlCommand insertcmd = new SqlCommand("INSERT INTO Student_ans(AnsId) VALUES (@AnsId)");
-                insertcmd.Connection = con;
-                insertcmd.Parameters.AddWithValue("@QuesID", selectedQues);
-                insertcmd.Parameters.AddWithValue("@AnsId", selectedAns);
-                con.Open();
-                insertcmd.ExecuteNonQuery();
-                con.Close();
-            }
+            int quesid;
+            int ansid;
 
+            for (int i = 0; i < GridView1.Rows.Count; i++)
+            {
+                if (Op1.Checked)
+                {
+                    quesid = i;
+                    ansid = "1";
+                }
+                if (Op2.Checked)
+                {
+                    quesid = i;
+                    ansid = "2";
+                }
+                if (Op3.Checked)
+                {
+                    quesid = i;
+                    ansid = "3";
+                }
+                if (Op4.Checked)
+                {
+                    quesid = i;
+                    ansid = "4";
+                }
+                var cmd = "insert into Student_ans values(@QuesID,@AnsID)";
+                using (SqlConnection sqlconn = new SqlConnection(mainconn))
+                {
+                    using (SqlCommand sqlcomm = new SqlCommand(sqlcomm, sqlconn))
+                    {
+                        sqlcomm.Parameters.AddWithValue("@QuesID",quesid);
+                        sqlcomm.Parameters.AddWithValue("@AnsID",ansid);
+
+                        sqlconn.Open();
+                        sqlcomm.ExecuteNonQuery();
+                        sqlconn.Close();
+                    }
+                }
+            }
         }
     }
 }
