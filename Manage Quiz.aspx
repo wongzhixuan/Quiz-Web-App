@@ -49,7 +49,12 @@
                                     <asp:Label ID="Description" runat="server" Text='<%# Bind("Description") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-
+                            <asp:TemplateField HeaderText="Score" SortExpression="Score">
+                                
+                                <ItemTemplate>
+                                    <asp:Label ID="Class" runat="server" Text='<%# Bind("class_name") %>'</asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="Score" SortExpression="Score">
                                 <EditItemTemplate>
                                     <asp:TextBox ID="txt_score" runat="server" Text='<%# Bind("Score") %>' Width="50px" TextMode="Number"></asp:TextBox>

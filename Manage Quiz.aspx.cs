@@ -42,8 +42,10 @@ namespace Quiz_Web_App
                 ViewState["Paging"] = dataTable;
                 quiz_view.DataSource = dataTable;
                 quiz_view.DataBind();
+                DataTable dt = (DataTable)ViewState["Paging"];
                 sqlConnection.Close();
             }
+            
         }
 
         protected void createQuiz_Click(object sender, EventArgs e)
