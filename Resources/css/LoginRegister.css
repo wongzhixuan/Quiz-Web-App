@@ -1,7 +1,17 @@
 ﻿.centerwindow {
-    width: 650px;
+    width: 720px;
     height: 700px;
-    margin: 80px auto 80px auto;
+    margin: 75px auto 75px auto;
+    padding: 50px;
+    position: relative;
+    border-radius: 20px;
+    background-color: #ffdd6a;
+}
+
+.centerwindowregister {
+    width: 720px;
+    height: 1150px;
+    margin: 75px auto 75px auto;
     padding: 50px;
     position: relative;
     border-radius: 20px;
@@ -9,7 +19,7 @@
 }
 
 .title p {
-    font-size: 60px;
+    font-size: 52px;
     text-align: center;
     font-family: 'Trebuchet MS', sans-serif;
     font-weight: 800;
@@ -18,7 +28,7 @@
 
 table {
     border-color: #ffffff;
-    width: 70%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -27,7 +37,7 @@ table tr {
     text-align: center;
 }
 table p {
-    font-size: 20px;
+    font-size: 22px;
     font-family: 'Arial',sans-serif;
     margin-top: 10px;
     margin-bottom: 4px;
@@ -60,7 +70,7 @@ table p {
 
 form .button {
     width: 450px;
-    height: 80px;
+    height: 70px;
     background-color: #ffb600;
     margin-top: 35px;
     border-radius: 35px;
@@ -72,7 +82,7 @@ form .button {
 
     form .button:hover {
         width: 450px;
-        height: 80px;
+        height: 70px;
         background-color: #ff8b00;
         margin-top: 35px;
         border-radius: 35px;

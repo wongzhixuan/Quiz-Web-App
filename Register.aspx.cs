@@ -19,7 +19,6 @@ namespace Quiz_Web_App
             if (!IsPostBack)
             {
                 ClearTextBox();
-                
             }
         }
 
@@ -32,13 +31,12 @@ namespace Quiz_Web_App
             {
                 if (txtCardID.Text == "" || txtPassword.Text == "" || txtReconfirmPassword.Text == "" || txtFullName.Text == "" || txtEmailAddress.Text == "")
                 {
-                    lblSuccessMessage.Text = lblErrorMessage.Text = "";
-                    lblErrorMessage.Text = "Mandatory Fields Are Still Empty!";
+                    Response.Write("<script>alert('Please Fill In All Mandatory Sections!');</script>");
                 }
                 else if (txtReconfirmPassword.Text != txtPassword.Text)
                 {
-                    lblSuccessMessage.Text = lblErrorMessage.Text = "";
-                    lblErrorMessage.Text = "Password Do Not Match!";
+                    Response.Write("<script>alert('Password Do Not Match!');</script>");
+                    txtPassword.Text = txtReconfirmPassword.Text = "";
                 }
                 else
                 {
@@ -58,14 +56,14 @@ namespace Quiz_Web_App
                         sqlCmd.ExecuteNonQuery();
                         sqlCon.Close();
                         ClearTextBox();
-                        lblSuccessMessage.Text = "Your Request Was Submitted Successfully.";
+                        Response.Write("<script>alert('Your Registration Was Submitted Successfully!');</script>");
                     }
                 }
             }
             else
             {
                 ClearTextBox();
-                lblErrorMessage.Text = "Register Failed. This Card ID was registered!";
+                Response.Write("<script>alert('Register Failed. This Card ID was registered!');</script>");
             }
 
             
@@ -80,7 +78,6 @@ namespace Quiz_Web_App
         {
             hfUserID.Value = "";
             txtFullName.Text = txtEmailAddress.Text = txtPhoneNumber.Text = txtCardID.Text = txtPassword.Text = txtReconfirmPassword.Text = "";
-            lblSuccessMessage.Text = lblErrorMessage.Text = "";
         }
 
         private bool CheckUserExist()
