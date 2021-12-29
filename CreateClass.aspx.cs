@@ -31,6 +31,7 @@ namespace Quiz_Web_App
             ArrayList arrayList = (ArrayList)ViewState["student_table"];
             if (text_class_name.Text.Trim() == "")
             {
+                SuccessMessage.Visible = false;
                 ErrorMessage.Visible = true;
                 ErrorMessage.Text = "The class name should not be empty";
 
@@ -76,11 +77,13 @@ namespace Quiz_Web_App
                     ClearTextBox();
                     if (class_id > 0)
                     {
+                        ErrorMessage.Visible = false;
                         SuccessMessage.Text = "Your Class is Created Successfully. Class Id :" + class_id + ", " + student_count + "/" + arrayList_count + " students added.";
                         SuccessMessage.Visible = true;
                     }
                     else
                     {
+                        SuccessMessage.Visible = false;
                         ErrorMessage.Text = "Class Create Failed.";
                         ErrorMessage.Visible = true;
                     }

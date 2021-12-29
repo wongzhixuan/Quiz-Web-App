@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Collections;
 
 namespace Quiz_Web_App
 {
@@ -41,8 +42,10 @@ namespace Quiz_Web_App
                 ViewState["Paging"] = dataTable;
                 quiz_view.DataSource = dataTable;
                 quiz_view.DataBind();
+                DataTable dt = (DataTable)ViewState["Paging"];
                 sqlConnection.Close();
             }
+            
         }
 
         protected void createQuiz_Click(object sender, EventArgs e)
@@ -52,9 +55,50 @@ namespace Quiz_Web_App
 
         protected void quiz_view_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int id = Convert.ToInt16(quiz_view.DataKeys[e.RowIndex].Values["QuizID"].ToString());
-            quiz_delete(id);
+            int id = int.Parse(quiz_view.DataKeys[e.RowIndex].Values["QuizID"].ToString());
+            if (checkDeletePermission(id))
+            {
+                quiz_delete(id);
+            }
+            else
+            {
+                SuccessMessage.Visible = false;
+                ErrorMessage.Visible = true;
+                ErrorMessage.Text = "Cannot delete selected rows as there are something depending on it!";
+            }
+            
             getData();
+        }
+
+        private bool checkDeletePermission(int id)
+        {
+            bool canDelete = true;
+            ArrayList quizList = new ArrayList();
+            using (SqlConnection sqlcon = new SqlConnection(connection_string))
+            {
+                sqlcon.Open();
+                SqlCommand cmd = new SqlCommand("SELECT Quiz_id FROM Quiz_question GROUP BY Quiz_id", sqlcon);
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+                sqlcon.Close();
+                
+                for (int i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    quizList.Add(dataTable.Rows[i]["Quiz_id"].ToString());
+                }
+                foreach (String item in quizList)
+                {
+                    if (int.Parse(item) == id)
+                    {
+                        canDelete = false;
+                    }
+
+                }
+
+            }
+            return canDelete;
         }
 
         private void quiz_delete(int id)
@@ -68,12 +112,14 @@ namespace Quiz_Web_App
             con.Close();
             if (count > 0)
             {
+                ErrorMessage.Visible = false;
                 SuccessMessage.Text = "Your Quiz is Deleted Successfully";
                 SuccessMessage.Visible = true;
             }
             else
             {
-                ErrorMessage.Text = "Class Quiz Failed";
+                SuccessMessage.Visible = false;
+                ErrorMessage.Text = "Quiz Delete Failed";
                 ErrorMessage.Visible = true;
             }
         }
@@ -133,8 +179,124 @@ namespace Quiz_Web_App
 
         protected void quiz_view_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            quiz_view.EditIndex = e.NewEditIndex;
+            getData();
+        }
+
+        protected void quiz_view_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            quiz_view.EditIndex = -1;
+            getData();
+        }
+
+        protected void quiz_view_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            TextBox txttitle = quiz_view.Rows[e.RowIndex].FindControl("txt_title") as TextBox;
+            TextBox txtdescrip = quiz_view.Rows[e.RowIndex].FindControl("txt_descrip") as TextBox;
+            TextBox txtscore = quiz_view.Rows[e.RowIndex].FindControl("txt_score") as TextBox;
+            TextBox txtstart = quiz_view.Rows[e.RowIndex].FindControl("txt_start") as TextBox;
+            TextBox txtend = quiz_view.Rows[e.RowIndex].FindControl("txt_finish") as TextBox;
+
+            int id = int.Parse(quiz_view.DataKeys[e.RowIndex].Values["QuizID"].ToString()); 
+
+            // validate input before updating
+            if(validateInputs(txttitle.Text, txtscore.Text, txtstart.Text, txtend.Text))
+            quiz_update(id, txttitle.Text.ToString(), txtdescrip.Text.ToString(), txtscore.Text.ToString(), txtstart.Text, txtend.Text);
+            quiz_view.EditIndex = -1;
+            getData();
+        }
+        private bool validateInputs(string txt_title, string txt_score, string txt_startDate, string txt_endDate)
+        {
+            SuccessMessage.Visible = false;
+            // Important fields cannot be empty
+            if (txt_title == "")
+            {
+                ErrorMessage.Text = "Quiz Title should not be empty";
+                ErrorMessage.Visible = true;
+                return false;
+            }
+            else if (txt_score == "")
+            {
+                ErrorMessage.Text = "Quiz Score should not be empty";
+                ErrorMessage.Visible = true;
+                return false;
+            }
+            else if (txt_startDate == "")
+            {
+                ErrorMessage.Text = "Start Date should be specified";
+                ErrorMessage.Visible = true;
+                return false;
+
+            }
+            else if (txt_endDate == "")
+            {
+                ErrorMessage.Text = "End Date should be specified";
+                ErrorMessage.Visible = true;
+                return false;
+            }
+            
+            // The score should be in positive integer and not 0
+            else if (int.Parse(txt_score) <= 0)
+            {
+                ErrorMessage.Text = "The Score should be greater than 0.";
+                ErrorMessage.Visible = true;
+                return false;
+            }
+            // the start date should be after the current time
+            else if (DateTime.Parse(txt_startDate) < DateTime.Now)
+            {
+                ErrorMessage.Text = "The start time should not be set to past time.";
+                ErrorMessage.Visible = true;
+                return false;
+            }
+            // the end date should be at least 10 min after start date
+            else if (DateTime.Parse(txt_endDate) < DateTime.Parse(txt_startDate).AddMinutes(10))
+            {
+                ErrorMessage.Text = "The end time should be at least 10 mins after start date.";
+                ErrorMessage.Visible = true;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void quiz_update(int id, string text1, string text2, string text3, string text4, string text5)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(connection_string))
+            {
+
+                SqlCommand sqlCommand = new SqlCommand("UpdateQuiz", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@QuizID" , id);
+                sqlCommand.Parameters.AddWithValue("@Title", text1);
+                sqlCommand.Parameters.AddWithValue("@Description", text2);
+                sqlCommand.Parameters.AddWithValue("@Score", int.Parse(text3));
+                sqlCommand.Parameters.AddWithValue("@StartedDate", DateTime.Parse(text4));
+                sqlCommand.Parameters.AddWithValue("@FinishedDate", DateTime.Parse(text5));
+                
+                sqlConnection.Open();
+                int count = sqlCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+                if (count > 0)
+                {
+                    ErrorMessage.Visible = false;
+                    SuccessMessage.Text = "Your Quiz is Updated Successfully";
+                    SuccessMessage.Visible = true;
+                }
+                else
+                {
+                    ErrorMessage.Text = "Quiz Update Failed";
+                    ErrorMessage.Visible = true;
+                }
+            }
+        }
+
+        protected void quiz_view_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+        {
             HttpCookie quizCookie = new HttpCookie("quizInfo");
-            quizCookie["quizID"] = e.NewEditIndex.ToString();
+            quizCookie["quizID"] = quiz_view.DataKeys[e.NewSelectedIndex].Values["QuizID"].ToString();
             Response.Cookies.Add(quizCookie);
             Response.Redirect("EditQuiz.aspx");
         }

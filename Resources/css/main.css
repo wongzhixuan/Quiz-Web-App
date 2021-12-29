@@ -50,13 +50,13 @@ body {
     background-color: darkslategrey;
     border-radius: 5px;
     margin: 2em 2em 0em 2em;
-    padding: 2em 2em 0 2em;
+    padding: 2em 0em 0 0em;
 }
 
 .content-container {
     background: #fff;
     height: 1000px;
-    margin: 4em 2em 0em 2em;
+    margin: 2em 2em 0em 2em;
     padding: 2em;
     position: relative;
     border-radius: 5px;
@@ -76,8 +76,8 @@ body {
 
 .rightcolumn {
     float: right;
-    width: 25%;
-    padding-left: 20px;
+    width: 20%;
+    padding-left: 10px;
 }
 .panel {
     margin: 10px 0px 0px 0px;
@@ -158,4 +158,22 @@ body {
 .form-group{
     margin:2em;
     
+}
+.table_custom {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    width: 350px;
+}
+    .table_custom th {
+        background-color: #F7F7F7;
+        color: #333;
+        font-weight: bold;
+    }
+        .table_custom th td {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+
+.auto-style1 {
+    width: 300px;
 }

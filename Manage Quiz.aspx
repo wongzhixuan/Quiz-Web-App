@@ -13,7 +13,7 @@
                             <li class="animation"><a href="TeachersMenu.aspx">Dashboard</a></li>
                             <li class="animation"><a href="Manage Class.aspx">Manage Class</a></li>
                             <li class="animation"><a href="Manage Quiz.aspx">Manage Quiz</a></li>
-                            <li class="animation" style="margin-top: 5px"><a href="#Student">Manage Students </a></li>
+                            <li class="animation" style="margin-top: 5px"><a href="#Student">Student Grades</a></li>
 
                         </ul>
                     </nav>
@@ -28,41 +28,55 @@
                 <center>
                     <asp:Label runat="server" Text="Quiz List" Font-Bold="True" Font-Size="Larger" CssClass="feature-title"></asp:Label>
 
-                    <asp:GridView runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" ID="quiz_view" DataKeyNames="QuizID" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CssClass="table " OnRowDeleting="quiz_view_RowDeleting" OnSorting="quiz_view_Sorting" OnPageIndexChanging="quiz_view_PageIndexChanging" OnRowEditing="quiz_view_RowEditing" >
+                    <asp:GridView runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" ID="quiz_view" DataKeyNames="QuizID" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CssClass="table " OnRowDeleting="quiz_view_RowDeleting" OnSorting="quiz_view_Sorting" OnPageIndexChanging="quiz_view_PageIndexChanging" OnRowEditing="quiz_view_RowEditing" OnRowCancelingEdit="quiz_view_RowCancelingEdit" OnRowUpdating="quiz_view_RowUpdating" OnSelectedIndexChanging="quiz_view_SelectedIndexChanging" >
                         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
 
                         <Columns>
                             
                             <asp:TemplateField HeaderText="Title" SortExpression="Title">
-                                <%--<EditItemTemplate>
-                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("class_name") %>'></asp:TextBox>
-                                </EditItemTemplate>--%>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txt_title" runat="server" Text='<%# Bind("Title") %>' Width="150px"></asp:TextBox>
+                                </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Title" runat="server" Text='<%# Bind("Title") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Description" SortExpression="Description">
-                                <%--<EditItemTemplate>
-                                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("class_description") %>'></asp:TextBox>
-                                </EditItemTemplate>--%>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txt_descrip" runat="server" Text='<%# Bind("Description") %>' Width="150px"></asp:TextBox>
+                                </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Description" runat="server" Text='<%# Bind("Description") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-
+                            <asp:TemplateField HeaderText="Class" SortExpression="class_name">
+                                
+                                <ItemTemplate>
+                                    <asp:Label ID="Class" runat="server" Text='<%# Bind("class_name") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="Score" SortExpression="Score">
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txt_score" runat="server" Text='<%# Bind("Score") %>' Width="50px" TextMode="Number"></asp:TextBox>
+                                </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Score" runat="server" Text='<%# Bind("Score") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
 
                             <asp:TemplateField HeaderText="Start" SortExpression="StartedDate">
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txt_start" runat="server" Text='<%# Bind("StartedDate") %>' Width="150px" TextMode="DateTimeLocal"></asp:TextBox>
+                                </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="StartedDate" runat="server" Text='<%# Bind("StartedDate") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
 
                             <asp:TemplateField HeaderText="Finish" SortExpression="FinishedDate">
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txt_finish" runat="server" Text='<%# Bind("FinishedDate") %>' Width="150px" TextMode="DateTimeLocal"></asp:TextBox>
+                                </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="FinishedDate" runat="server" Text='<%# Bind("FinishedDate") %>'></asp:Label>
                                 </ItemTemplate>
@@ -73,6 +87,11 @@
                             <asp:CommandField ButtonType="Button" ShowDeleteButton="True"  ControlStyle-CssClass="btn btn-primary">
 <ControlStyle CssClass="btn btn-primary"></ControlStyle>
                             </asp:CommandField>
+
+                            <asp:ButtonField CommandName="Select" Text="Edit Questions">
+                            <ControlStyle CssClass="btn btn-link" />
+                            </asp:ButtonField>
+
                         </Columns>
 
                         <EditRowStyle BackColor="#999999" />

@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AttemptQuiz.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="LoginChoice.aspx" />
     <Content Include="Register.aspx" />
@@ -101,7 +102,6 @@
     <Content Include="Resources\Images\Shinsen-gumi.png" />
     <Content Include="StudentsMenu.aspx" />
     <Content Include="StudentsProfile.aspx" />
-    <Content Include="TeachersProfile.aspx" />
     <Content Include="Resources\js\jquery.sticky.js" />
     <Content Include="Web.config" />
     <Content Include="TeachersMenu.aspx" />
@@ -111,8 +111,15 @@
     <Content Include="CreateQuiz.aspx" />
     <Content Include="EditQuiz.aspx" />
     <Content Include="CreateQuiz-Question.aspx" />
+    <Content Include="ManageClassStudent.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttemptQuiz.aspx.cs">
+      <DependentUpon>AttemptQuiz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AttemptQuiz.aspx.designer.cs">
+      <DependentUpon>AttemptQuiz.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -163,13 +170,6 @@
     <Compile Include="TeachersMenu.aspx.designer.cs">
       <DependentUpon>TeachersMenu.aspx</DependentUpon>
     </Compile>
-    <Compile Include="TeachersProfile.aspx.cs">
-      <DependentUpon>TeachersProfile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TeachersProfile.aspx.designer.cs">
-      <DependentUpon>TeachersProfile.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Manage Class.aspx.cs">
       <DependentUpon>Manage Class.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -211,6 +211,13 @@
     </Compile>
     <Compile Include="CreateQuiz-Question.aspx.designer.cs">
       <DependentUpon>CreateQuiz-Question.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageClassStudent.aspx.cs">
+      <DependentUpon>ManageClassStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageClassStudent.aspx.designer.cs">
+      <DependentUpon>ManageClassStudent.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

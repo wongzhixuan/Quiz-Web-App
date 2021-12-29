@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
+using System.Collections;
 
 namespace Quiz_Web_App
 {
@@ -44,27 +45,33 @@ namespace Quiz_Web_App
         }
         private void class_update(string text1, string text2, int id)
         {
-            SqlConnection sqlConnection = new SqlConnection(connection_string);
-            SqlCommand sqlCommand = new SqlCommand("UpdateClass", sqlConnection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.AddWithValue("@class_id", id);
-            sqlCommand.Parameters.AddWithValue("@class_name", text1);
-            sqlCommand.Parameters.AddWithValue("@class_description", text2);
-            DateTime date = DateTime.Now;
-            sqlCommand.Parameters.AddWithValue("@created_date", date);
-            sqlConnection.Open();
-            int count = sqlCommand.ExecuteNonQuery();
-            sqlConnection.Close();
-            if (count > 0)
+            using (SqlConnection sqlConnection = new SqlConnection(connection_string))
             {
-                SuccessMessage.Text = "Your Class is Updated Successfully";
-                SuccessMessage.Visible = true;
+                
+                SqlCommand sqlCommand = new SqlCommand("UpdateClass", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@class_id", id);
+                sqlCommand.Parameters.AddWithValue("@class_name", text1);
+                sqlCommand.Parameters.AddWithValue("@class_description", text2);
+                DateTime date = DateTime.Now;
+                sqlCommand.Parameters.AddWithValue("@created_date", date);
+                sqlConnection.Open();
+                int count = sqlCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+                if (count > 0)
+                {
+                    ErrorMessage.Visible = false;
+                    SuccessMessage.Text = "Your Class is Updated Successfully";
+                    SuccessMessage.Visible = true;
+                }
+                else
+                {
+                    SuccessMessage.Visible = false;
+                    ErrorMessage.Text = "Class Update Failed";
+                    ErrorMessage.Visible = true;
+                }
             }
-            else
-            {
-                ErrorMessage.Text = "Class Update Failed";
-                ErrorMessage.Visible = true;
-            }
+            
         }
 
         protected void class_delete(int id)
@@ -78,11 +85,13 @@ namespace Quiz_Web_App
             con.Close();
             if (count > 0)
             {
+                ErrorMessage.Visible = false;
                 SuccessMessage.Text = "Your Class is Deleted Successfully";
                 SuccessMessage.Visible = true;
             }
             else
             {
+                SuccessMessage.Visible = false;
                 ErrorMessage.Text = "Class Delete Failed";
                 ErrorMessage.Visible = true;
             }
@@ -114,12 +123,52 @@ namespace Quiz_Web_App
 
         protected void class_view_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int id = Convert.ToInt16(class_view.DataKeys[e.RowIndex].Values["class_id"].ToString());
-            class_delete(id);
+            int id = int.Parse(class_view.DataKeys[e.RowIndex].Values["class_id"].ToString());
+            if (checkDeletePermission(id))
+            {
+                class_delete(id);
+            }
+            else
+            {
+                SuccessMessage.Visible = false;
+                ErrorMessage.Visible = true;
+                ErrorMessage.Text = "Cannot delete selected rows as there are something depending on it!";
+            }
+            
             getData();
         }
-
         
+        private bool checkDeletePermission(int id)
+        {
+            bool canDelete = true;
+            ArrayList classList = new ArrayList();
+            using (SqlConnection sqlcon = new SqlConnection(connection_string))
+            {
+                sqlcon.Open();
+                SqlCommand cmd = new SqlCommand("SELECT ClassId FROM Quiz GROUP BY ClassId ", sqlcon);
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+                sqlcon.Close();
+                ViewState["ClassTable"] = dataTable;
+                for (int i = 0; i < dataTable.Rows.Count ; i++)
+                {
+                    classList.Add(dataTable.Rows[i]["ClassId"].ToString());
+                }
+                foreach(String item in classList)
+                {
+                    if(int.Parse(item) == id)
+                    {
+                        canDelete = false;
+                    }
+                    
+                }
+                
+            }
+            return canDelete;
+
+        }
 
         protected void class_view_RowEditing(object sender, GridViewEditEventArgs e)
         {
@@ -178,6 +227,14 @@ namespace Quiz_Web_App
             class_view.PageIndex = e.NewPageIndex;
             class_view.DataSource = ViewState["Paging"];
             class_view.DataBind();
+        }
+
+        protected void class_view_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+        {
+            HttpCookie classCookie = new HttpCookie("classInfo");
+            classCookie["classId"] = class_view.DataKeys[e.NewSelectedIndex].Values["class_id"].ToString();
+            Response.Cookies.Add(classCookie);
+            Response.Redirect("ManageClassStudent.aspx");
         }
     }
 }
