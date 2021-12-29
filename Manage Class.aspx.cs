@@ -113,13 +113,11 @@ namespace Quiz_Web_App
             TextBox txtname = class_view.Rows[e.RowIndex].FindControl("TextBox1") as TextBox;
             TextBox txtdescrip = class_view.Rows[e.RowIndex].FindControl("TextBox2") as TextBox;
 
-            int id = Convert.ToInt16(class_view.DataKeys[e.RowIndex].Values["class_id"].ToString());;
+            int id = Convert.ToInt16(class_view.DataKeys[e.RowIndex].Values["class_id"].ToString());
             class_update(txtname.Text, txtdescrip.Text, id);
             class_view.EditIndex = -1;
             getData();
         }
-
-        
 
         protected void class_view_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
