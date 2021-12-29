@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeFile="AttemptQuiz.aspx.cs" Inherits="Quiz_Web_App.AttemptQuiz" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" Inherits="Quiz_Web_App.AttemptQuiz" Codebehind="AttemptQuiz.aspx.cs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <div class="container green_container">
@@ -21,7 +21,7 @@
                                     <ItemTemplate>
                                         <tr>
                                         <hr />
-                                        <asp:RadioButton ID="Op1" runat="server" Width="100px" AutoPostBack="true" Text='<%#Eval("Option1") %>' GroupName="Option"/>
+                                            <asp:RadioButton ID="Op1" runat="server" Width="100px" Text='<%#Eval("Option1") %>' GroupName="Option"/>
                                         <hr />
                                         </tr>
                                     </ItemTemplate>
@@ -30,7 +30,7 @@
                                     <ItemTemplate>
                                         <tr>
                                         <hr />
-                                        <asp:RadioButton ID="Op2" runat="server" Width="100px" AutoPostBack="true" Text='<%#Eval("Option2") %>' GroupName="Option"/>
+                                            <asp:RadioButton ID="Op2" runat="server" Width="100px" Text='<%#Eval("Option2") %>' GroupName="Option"/>
                                         <hr />
                                         </tr>
                                     </ItemTemplate>
@@ -39,7 +39,7 @@
                                     <ItemTemplate>
                                         <tr>
                                         <hr />
-                                        <asp:RadioButton ID="Op3" runat="server" Width="100px" AutoPostBack="true" Text='<%#Eval("Option3") %>' GroupName="Option"/>
+                                            <asp:RadioButton ID="Op3" runat="server" Width="100px" Text='<%#Eval("Option3") %>' GroupName="Option"/>
                                         <hr />
                                         </tr>
                                     </ItemTemplate>
@@ -48,7 +48,7 @@
                                     <ItemTemplate>
                                         <tr>
                                         <hr />
-                                        <asp:RadioButton ID="Op4" runat="server" Width="100px" AutoPostBack="true" Text='<%#Eval("Option4") %>' GroupName="Option"/>
+                                            <asp:RadioButton ID="Op4" runat="server" Width="100px" Text='<%#Eval("Option4") %>' GroupName="Option"/>
                                         <hr />
                                         </tr>
                                     </ItemTemplate>

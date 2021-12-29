@@ -20,7 +20,6 @@ namespace Quiz_Web_App
                 BindGrid();
         }
 
-
         public void BindGrid()
         {
             SqlConnection sqlconn = new SqlConnection(mainconn);
@@ -45,22 +44,27 @@ namespace Quiz_Web_App
                 if (Op1.Checked)
                 {
                     quesid = i;
-                    ansid = "1";
+                    ansid = '1';
                 }
-                if (Op2.Checked)
+                else if (Op2.Checked)
                 {
                     quesid = i;
-                    ansid = "2";
+                    ansid = '2';
                 }
-                if (Op3.Checked)
+                else if (Op3.Checked)
                 {
                     quesid = i;
-                    ansid = "3";
+                    ansid = '3';
                 }
-                if (Op4.Checked)
+                else if (Op4.Checked)
                 {
                     quesid = i;
-                    ansid = "4";
+                    ansid = '4';
+                }
+                else
+                {
+                    quesid = i;
+                    ansid = '0';
                 }
                 var cmd = "insert into Student_ans values(@QuesID,@AnsID)";
                 using (SqlConnection sqlconn = new SqlConnection(mainconn))
