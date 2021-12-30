@@ -24,17 +24,12 @@
     <%-- The Main Content Container--%>
     <div class="container green_container">
     <div class="content-container">
-        <div class="menu_studentlist">
-            <ul>
-                <li><a>XXX Student System</a></li>
-                <li><a>Student List & Grade</a></li>
-                <li><a>Anouncement Quiz</a></li>
-            </ul>
-        </div>
-        <asp:Label ID="Label1" runat="server" Text="Student List" Font-Bold="True" Font-Size="Large"></asp:Label>
+        
+        <asp:Label ID="Label1" runat="server" Text="Student List & Grade" Font-Bold="True" Font-Size="Large"></asp:Label>
         <div class="student_list">
             <asp:Label ID="Label2" runat="server" Text="Class Name: "></asp:Label>
-            <asp:DropDownList ID="ddl_class" runat="server" CssClass="btn btn-outline-primary dropdown-toggle" OnSelectedIndexChanged="ddl_class_SelectedIndexChanged" AutoPostBack="True" >
+            <asp:DropDownList ID="ddl_class" runat="server" CssClass="btn btn-outline-primary dropdown-toggle" 
+                OnSelectedIndexChanged="ddl_class_SelectedIndexChanged" AutoPostBack="True" >
                 <asp:ListItem Value="-1">--classname--</asp:ListItem>
             </asp:DropDownList>
 
@@ -44,12 +39,23 @@
 
             </asp:DropDownList>
                 
-            <br />
             <div class="form-group w-50">
-            <asp:Button ID="btn_getData" runat="server" Text="Submit" CssClass="btn btn-primary float-end" OnClick="btn_getData_Click" />
-                </div>
+                <asp:Button ID="btn_getData" runat="server" Text="Submit" CssClass="btn btn-primary float-end" OnClick="btn_getData_Click" Width="77px" />
+            </div>
+            <br />
+            <br />
+            <br />
+            <div>
+                <asp:Label ID="ErrorMessage" runat="server" Text="" CssClass="alert alert-danger alert-dismissible fade show" Visible="false"></asp:Label>
+                <asp:Label ID="SuccessMessage" runat="server" Text="L" CssClass="alert alert-success alert-dismissible fade show" Visible="false"></asp:Label>
+            </div>
+
+            <br />
         </div>
-        <asp:GridView ID="studentList_view" runat="server" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" DataKeyNames="student_id" CellPadding="4" ForeColor="#333333" GridLines="None">
+        <asp:GridView ID="studentList_view" runat="server" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" 
+            DataKeyNames="student_id" CellPadding="4" ForeColor="#333333" GridLines="None"
+            CssClass="table" OnSorting="class_view_Sorting" OnPageIndexChanging ="class_view_PageIndexChanging" 
+            OnSelectedIndexChanging="class_view_SelectedIndexChanging" Style="width:50%; margin-left:50px; margin-right:auto">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 
@@ -81,7 +87,7 @@
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
 
         </asp:GridView>
-        
+        <br />
         <div>
             <asp:Button ID="Button1" runat="server" Text="Download" OnClick="download" /></div>
         </div>
