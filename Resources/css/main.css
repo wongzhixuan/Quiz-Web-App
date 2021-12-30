@@ -61,8 +61,9 @@ body {
     position: relative;
     border-radius: 5px;
     scroll-behavior: smooth;
-    overflow:scroll;
+    overflow: scroll;
 }
+
 .page-footer {
     background-color: #222;
     color: #ccc;
@@ -79,6 +80,7 @@ body {
     width: 20%;
     padding-left: 10px;
 }
+
 .panel {
     margin: 10px 0px 0px 0px;
     width: 300px;
@@ -143,32 +145,35 @@ body {
     text-align: center;
 }
 
-   
-.class-table{
-    margin:2em auto;
+
+.class-table {
+    margin: 2em auto;
 }
+
 .feature-title {
     color: #333;
     font-size: 1.3rem;
     font-weight: 700;
     text-transform: uppercase;
-    margin:2em auto 2em auto;
+    margin: 2em auto 2em auto;
+}
 
+.form-group {
+    margin: 2em;
 }
-.form-group{
-    margin:2em;
-    
-}
+
 .table_custom {
     border: 1px solid #ccc;
     border-collapse: collapse;
     width: 350px;
 }
+
     .table_custom th {
         background-color: #F7F7F7;
         color: #333;
         font-weight: bold;
     }
+
         .table_custom th td {
             padding: 5px;
             border: 1px solid #ccc;
@@ -177,3 +182,32 @@ body {
 .auto-style1 {
     width: 300px;
 }
+
+.student_list {
+    align-items: center;
+}
+
+.menu_studentlist ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: black;
+}
+
+.menu_studentlist li {
+    float: left;
+}
+
+    .menu_studentlist li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+        .menu_studentlist li a:hover {
+            background-color: whitesmoke;
+            color: black;
+        }

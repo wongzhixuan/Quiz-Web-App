@@ -11,17 +11,8 @@ namespace Quiz_Web_App
 {
 
 
-    public partial class Student_List_Grade
+    public partial class WebForm8
     {
-
-        /// <summary>
-        /// form1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
         /// Label1 control.
@@ -42,13 +33,13 @@ namespace Quiz_Web_App
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// Class control.
+        /// ddl_class control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Class;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_class;
 
         /// <summary>
         /// Label3 control.
@@ -60,22 +51,31 @@ namespace Quiz_Web_App
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// Quiz control.
+        /// ddl_quiz control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Quiz;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_quiz;
 
         /// <summary>
-        /// student_list control.
+        /// btn_getData control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView student_list;
+        protected global::System.Web.UI.WebControls.Button btn_getData;
+
+        /// <summary>
+        /// studentList_view control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView studentList_view;
 
         /// <summary>
         /// Button1 control.

@@ -18,6 +18,7 @@ namespace Student_List_Grade_Quiz
         string connection_string = @"Data Source=MAIKE\SQL2019; Initial Catalog=QuizApp;Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*
             if (!Page.IsPostBack)
             {
                 ViewState["GridView1"] = null;
@@ -41,7 +42,7 @@ namespace Student_List_Grade_Quiz
                 GridView1.DataSource = dt;
                 GridView1.DataBind();
                 Session["Data"] = dt;
-            }
+            }*/
 
         }
 
@@ -69,6 +70,7 @@ namespace Student_List_Grade_Quiz
          */
         protected void download(object sender, EventArgs e)
         {
+            /*
             Response.Clear();
             Response.Buffer = true;
             Response.AddHeader("Content-Disposition", "attachment; filename=StudentList&Grade.doc");
@@ -76,10 +78,10 @@ namespace Student_List_Grade_Quiz
             Response.ContentType = "application/vnd.ms-word ";
             StringWriter sw = new StringWriter();
             HtmlTextWriter hw = new HtmlTextWriter(sw);
-            GridView1.RenderControl(hw);
+            student_list.RenderControl(hw);
             Response.Output.Write(sw.ToString());
             Response.Flush();
-            Response.End();
+            Response.End();*/
         }
 
         public override void VerifyRenderingInServerForm(Control control)

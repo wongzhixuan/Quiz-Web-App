@@ -6,42 +6,47 @@
 <head runat="server">
     <title>Student List and Grade</title>
     <style type="text/css">
-        div{
+        .student_list {
             align-items: center;
         }
-        ul{
+
+        .menu_studentlist ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
             overflow: hidden;
             background-color: black;
         }
-        li{
+
+        .menu_studentlist li {
             float: left;
         }
-        li a{
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-        li a:hover{
-            background-color: whitesmoke;
-            color: black;
-        }
 
+       .menu_studentlist li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                .menu_studentlist li a:hover {
+                    background-color: whitesmoke;
+                    color: black;
+                }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <ul>
-            <li><a>XXX Student System</a></li>
-            <li><a>Student List & Grade</a></li>
-            <li><a>Anouncement Quiz</a></li>
-        </ul>
+        <div class="menu_studentlist">
+            <ul>
+                <li><a>XXX Student System</a></li>
+                <li><a>Student List & Grade</a></li>
+                <li><a>Anouncement Quiz</a></li>
+            </ul>
+        </div>
         <asp:Label ID="Label1" runat="server" Text="Student List" Font-Bold="True" Font-Size="Large"></asp:Label>
-        <div>
+        <div class="student_list">
             <asp:Label ID="Label2" runat="server" Text="Class Name: "></asp:Label>
             <asp:DropDownList ID="Class" runat="server">
                 <asp:ListItem>--classname--</asp:ListItem>
@@ -53,7 +58,7 @@
                 <asp:ListItem>...</asp:ListItem>
             </asp:DropDownList>
         </div>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumn="True" AllowPaging="True" AllowSorting="True"
+        <asp:GridView ID="student_list" runat="server" AutoGenerateColumn="True" AllowPaging="True" AllowSorting="True"
             DataKeyNames="StudentID" CellPadding="4" ForeColor="#333333" GridLines="None">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <EditRowStyle BackColor="#999999" />
@@ -69,18 +74,19 @@
 
             <Columns>
                 <asp:TemplateField HeaderText="No."
-                      SortExpression="No." />
-                <asp:TemplateField  HeaderText="Student ID"
-                      SortExpression="student_id" />
-                <asp:TemplateField  HeaderText="Name"
-                      SortExpression="FullName" />
-                <asp:TemplateField  HeaderText="Grade"
-                      SortExpression="Grade" />
-                <asp:TemplateField  HeaderText="Score"
-                     SortExpression="Score" />
+                    SortExpression="No." />
+                <asp:TemplateField HeaderText="Student ID"
+                    SortExpression="student_id" />
+                <asp:TemplateField HeaderText="Name"
+                    SortExpression="FullName" />
+                <asp:TemplateField HeaderText="Grade"
+                    SortExpression="Grade" />
+                <asp:TemplateField HeaderText="Score"
+                    SortExpression="Score" />
             </Columns>
         </asp:GridView>
-        <div><asp:Button ID="Button1" runat="server" Text="Download" OnClick="download"/></div>
+        <div>
+            <asp:Button ID="Button1" runat="server" Text="Download" OnClick="download" /></div>
 
     </form>
 </body>
