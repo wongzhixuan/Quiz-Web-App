@@ -102,7 +102,6 @@
     <Content Include="Resources\Images\Shinsen-gumi.png" />
     <Content Include="StudentListandGrade.aspx" />
     <Content Include="StudentsMenu.aspx" />
-    <Content Include="StudentsProfile.aspx" />
     <Content Include="Resources\js\jquery.sticky.js" />
     <Content Include="Web.config" />
     <Content Include="TeachersMenu.aspx" />
@@ -165,13 +164,6 @@
     </Compile>
     <Compile Include="StudentsMenu.aspx.designer.cs">
       <DependentUpon>StudentsMenu.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="StudentsProfile.aspx.cs">
-      <DependentUpon>StudentsProfile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="StudentsProfile.aspx.designer.cs">
-      <DependentUpon>StudentsProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="TeachersMenu.aspx.cs">
       <DependentUpon>TeachersMenu.aspx</DependentUpon>
