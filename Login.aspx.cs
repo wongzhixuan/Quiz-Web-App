@@ -11,8 +11,8 @@ namespace Quiz_Web_App
 {
     public partial class Login : System.Web.UI.Page
     {
-        //string connectionString = @"Data Source=MAIKE\SQL2019;Initial Catalog=QuizApp;Integrated Security=True";
-        string connectionString = @"Data Source=LAPTOP-R7G5DB4N;Initial Catalog=QuizWebsiteDB;Integrated Security=True";
+        string connectionString = @"Data Source=MAIKE\SQL2019;Initial Catalog=QuizApp;Integrated Security=True";
+        //string connectionString = @"Data Source=LAPTOP-R7G5DB4N;Initial Catalog=QuizWebsiteDB;Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -30,14 +30,16 @@ namespace Quiz_Web_App
         {
             if (txtCardID.Text == "" || txtPassword.Text == "")
             {
-                Response.Write("<script>alert('Please Fill In All Mandatory Sections!');</script>");
+                Response.Write("<script>alert('Please Fill In " +
+                    "All Mandatory Sections!');</script>");
             }
             else
             {
                 using (SqlConnection sqlCon = new SqlConnection(connectionString))
                 {
                     sqlCon.Open();
-                    string query = "SELECT COUNT(1) FROM UserAcc WHERE CardID=@CardID AND Password=@Password AND UserType=@UserType";
+                    string query = "SELECT COUNT(1) FROM UserAcc WHERE CardID=@CardID " +
+                        "AND Password=@Password AND UserType=@UserType";
                     SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
                     sqlCmd.Parameters.AddWithValue("@CardID", txtCardID.Text.Trim());
                     sqlCmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
@@ -61,7 +63,8 @@ namespace Quiz_Web_App
                     else
                     {
                         ClearTextBox();
-                        Response.Write("<script>alert('Wrong User Credentials. Please Try Again!');</script>");
+                        Response.Write("<script>alert('Wrong User Credentials. " +
+                            "Please Try Again!');</script>");
 
                     }
                 }

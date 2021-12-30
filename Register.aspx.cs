@@ -29,9 +29,11 @@ namespace Quiz_Web_App
 
             if (UserExist == false)
             {
-                if (txtCardID.Text == "" || txtPassword.Text == "" || txtReconfirmPassword.Text == "" || txtFullName.Text == "" || txtEmailAddress.Text == "")
+                if (txtCardID.Text == "" || txtPassword.Text == "" || txtReconfirmPassword.Text == "" 
+                    || txtFullName.Text == "" || txtEmailAddress.Text == "")
                 {
-                    Response.Write("<script>alert('Please Fill In All Mandatory Sections!');</script>");
+                    Response.Write("<script>alert('Please Fill In All " +
+                        "Mandatory Sections!');</script>");
                 }
                 else if (txtReconfirmPassword.Text != txtPassword.Text)
                 {

@@ -23,7 +23,7 @@
 
                 <tr>
                     <td>
-                        <asp:TextBox ID="txtCardID" runat="server" onkeyup="this.value=this.value.toUpperCase()" MaxLength="10" class="textbox" placeholder="E.g.: SWE1234567 (Max. 10 characters)"/>
+                        <asp:TextBox ID="txtCardID" runat="server" onkeyup="this.value=this.value.toUpperCase()" MaxLength="11" class="textbox" placeholder="E.g.: SWE1234567 (Max. 10 characters)"/>
                         <asp:Label Text="*" runat="server" ForeColor="Red"/>
                     </td>
                 </tr>
