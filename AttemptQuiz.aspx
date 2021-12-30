@@ -4,6 +4,7 @@
         <div class="container green_container">
             <div class="content-container">
             <center>
+                <asp:Label ID="Score" runat="server" Text=""></asp:Label><br />
                 <asp:Repeater ID="Repeater1" runat="server">
                     <ItemTemplate>
                         <div class="quiz" style="font-family:Arial">
@@ -11,7 +12,8 @@
                             <tr>
                                 <td Width="600px">
                                     <hr />
-                                    <%#Eval("Ques_id") %>. <%#Eval("Title") %>
+                                    <asp:Label ID="Ques_id" runat="server" Text='<%#Eval("Ques_id") %>'></asp:Label>.
+                                    <asp:Label ID="Title" runat="server" Text='<%#Eval("Title") %>'></asp:Label>
                                     <br />
                                 </td>
                                 <td>
@@ -27,14 +29,14 @@
                             <tr>
                                 <td colspan="2" style="text-align: center; vertical-align: middle;">
                                     <br />
-                                    <asp:Label ID="SelectedAns" runat="server" Text=""></asp:Label>
-                                    <br />
+                                    <asp:Label ID="SelectedAns" runat="server" Text=""></asp:Label><br />
                                 </td>
                             </tr>
                         </table>
                         </div>
                     </ItemTemplate>
                 </asp:Repeater>
+                <br />
                 <asp:Button ID="BtnSubmit" runat="server" Text="Submit" OnClick="BtnSubmit_Click"/>
             </center>
             </div>
