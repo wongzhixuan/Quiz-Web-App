@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AttemptQuiz.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="LoginChoice.aspx" />
     <Content Include="Register.aspx" />
@@ -99,6 +100,7 @@
     <Content Include="Resources\Images\quizLogo.png" />
     <Content Include="Resources\Images\Quizva.png" />
     <Content Include="Resources\Images\Shinsen-gumi.png" />
+    <Content Include="StudentListandGrade.aspx" />
     <Content Include="StudentsMenu.aspx" />
     <Content Include="StudentsProfile.aspx" />
     <Content Include="Resources\js\jquery.sticky.js" />
@@ -113,6 +115,13 @@
     <Content Include="ManageClassStudent.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttemptQuiz.aspx.cs">
+      <DependentUpon>AttemptQuiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AttemptQuiz.aspx.designer.cs">
+      <DependentUpon>AttemptQuiz.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -141,6 +150,13 @@
     </Compile>
     <Compile Include="Site1.Master.designer.cs">
       <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="StudentListandGrade.aspx.cs">
+      <DependentUpon>StudentListandGrade.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StudentListandGrade.aspx.designer.cs">
+      <DependentUpon>StudentListandGrade.aspx</DependentUpon>
     </Compile>
     <Compile Include="StudentsMenu.aspx.cs">
       <DependentUpon>StudentsMenu.aspx</DependentUpon>

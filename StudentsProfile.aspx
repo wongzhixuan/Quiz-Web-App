@@ -26,7 +26,7 @@
 
                 <tr>
                     <td class="auto-style1">
-                        <asp:Label Text="Edit Your Email Address: " runat="server"/>
+                        <asp:Label Text="Your Email Address: " runat="server"/>
                     </td>
                     <td colspan="2">
                         <asp:Label Text="Your Email Address: " runat="server" ID="lblEmailAddress"/>
@@ -35,7 +35,7 @@
 
                 <tr>
                     <td class="auto-style1">
-                        <asp:Label Text="Edit Your Phone Number: " runat="server"/>
+                        <asp:Label Text="Your Phone Number: " runat="server"/>
                     </td>
                     <td colspan="2">
                         <asp:Label Text="Your Phone Number: " runat="server" ID="lblPhoneNumber"/>
