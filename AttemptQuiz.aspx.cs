@@ -37,7 +37,7 @@ namespace Quiz_Web_App
         protected void BtnSubmit_Click(object sender, EventArgs e)
         {
             SqlConnection sqlconn = new SqlConnection(mainconn);
-            string sqlquery = "Select O.Option1, O.Option2, O.Option3, O.Option4, A.QuesId, A.AnsId FROM Quiz_option AS O JOIN Quiz_ans  AS A ON O.Ques_id = A.QuesId";
+            string sqlquery = "Select O.Option1, O.Option2, O.Option3, O.Option4, A.QuesId, A.AnsId, Q.Score FROM Quiz_option AS O JOIN Quiz_ans  AS A ON O.Ques_id = A.QuesId JOIN Quiz_question AS Q ON Q.Ques_id = O.Ques_id";
             sqlconn.Open();
             SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
             SqlDataAdapter da = new SqlDataAdapter(sqlcomm);
@@ -96,13 +96,16 @@ namespace Quiz_Web_App
             dt2.Columns.Add(dc);
             dc = new DataColumn("Aid", typeof(int));
             dt2.Columns.Add(dc);
-            
+            dc = new DataColumn("SCR", typeof(int));
+            dt2.Columns.Add(dc);
+
 
             foreach (DataRow dr1 in dt.Rows)
             {
                 int QID = Convert.ToInt32(dr1[4]);
                 int AID = Convert.ToInt32(dr1[5]);
-                dt2.Rows.Add(QID, AID);
+                int SCR = Convert.ToInt32(dr1[6]);
+                dt2.Rows.Add(QID, AID, SCR);
             }
 
             int i = 0;
@@ -115,22 +118,24 @@ namespace Quiz_Web_App
                     Label Result = (Label)ri.FindControl("SelectedAns");
                     Result.Text = "The Selected Option is Correct";
                     Result.ForeColor = System.Drawing.Color.Green;
-                    count++;
+                    count += Convert.ToInt32(dt2.Rows[i][2]);
+                    total += Convert.ToInt32(dt2.Rows[i][2]);
                 }
                 else if (Equals(dt1.Rows[i][1], 0))
                 {
                     Label Result = (Label)ri.FindControl("SelectedAns");
                     Result.Text = "No Option Was Selected";
                     Result.ForeColor = System.Drawing.Color.Red;
+                    total += Convert.ToInt32(dt2.Rows[i][2]);
                 }
                 else
                 {
                     Label Result = (Label)ri.FindControl("SelectedAns");
                     Result.Text = "The Selected Option is Incorrect";
                     Result.ForeColor = System.Drawing.Color.Red;
+                    total += Convert.ToInt32(dt2.Rows[i][2]);
                 }
                 i++;
-                total++;
             }
             Score.Text = "Your Score Is " + count + " / " + total;
         }
