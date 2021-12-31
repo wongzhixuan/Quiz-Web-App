@@ -8,34 +8,61 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Collections;
 
 namespace Quiz_Web_App
 {
     public partial class AttemptQuiz : System.Web.UI.Page
     {
-        string mainconn = @"Data Source=localhost;Initial Catalog=QuizDB;Integrated Security=True";
+        //string mainconn = @"Data Source=localhost;Initial Catalog=QuizDB;Integrated Security=True";
+        string mainconn = @"Data Source=LAPTOP-R7G5DB4N;Initial Catalog=QuizWebsiteDB;Integrated Security=True";
         int attemptid = 0;
         protected void Page_Load(object sender, System.EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                HttpCookie quizcookie = Request.Cookies["quizInfo"];
-                if (quizcookie != null)
+                SetInitialDDL();
+
+            }
+            
+        }
+
+        private void SetInitialDDL()
+        {
+            ArrayList classList = new ArrayList();
+            if (Session["CardID"] != null)
+            {
+                using (SqlConnection con = new SqlConnection(mainconn))
                 {
-                    ViewState["quizID"] = int.Parse(quizcookie["quizID"].ToString());
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("GetStudentClass", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@student_id", Session["CardID"]);
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
+                    DataTable dataTable = new DataTable();
+                    sqlDataAdapter.Fill(dataTable);
+                    con.Close();
+                    for (int i = 0; i < dataTable.Rows.Count; i++)
+                    {
+                        classList.Add(new ListItem(dataTable.Rows[i]["class_name"].ToString(), dataTable.Rows[i]["class_id"].ToString()));
+                    }
                 }
-                BindGrid();
+                foreach (ListItem item in classList)
+                {
+                    ddl_class.Items.Add(item);
+                }
             }
         }
 
         public void BindGrid()
         {
-            int quizID = int.Parse(ViewState["quizID"].ToString());
+            int quiz_id = int.Parse(ddl_quiz.SelectedValue);
+            int class_id = int.Parse(ddl_class.SelectedValue);
             SqlConnection sqlconn = new SqlConnection(mainconn);
             sqlconn.Open();
             SqlCommand sqlCmd = new SqlCommand("ViewQuizDetails", sqlconn);
             sqlCmd.CommandType = System.Data.CommandType.StoredProcedure;
-            sqlCmd.Parameters.AddWithValue("@Quiz_id", quizID);
+            sqlCmd.Parameters.AddWithValue("@Quiz_id", quiz_id);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCmd);
             DataTable dt = new DataTable ();
             sqlDataAdapter.Fill(dt);
@@ -49,7 +76,7 @@ namespace Quiz_Web_App
 
         protected void BtnSubmit_Click(object sender, EventArgs e)
         {
-            int quizID = int.Parse(ViewState["quizID"].ToString());
+            int quizID = int.Parse(ddl_quiz.SelectedValue);
             string cardid = Convert.ToString(Session["CardID"]);
             SqlConnection sqlconn = new SqlConnection(mainconn);
             sqlconn.Open();
@@ -159,8 +186,7 @@ namespace Quiz_Web_App
                 sqlCommand.Parameters.AddWithValue("@status", 1);
                 sqlCommand.Parameters.AddWithValue("@score", count);
                 sqlconn1.Open();
-                attemptid = int.Parse(sqlCommand.ExecuteScalar().ToString());
-                sqlCommand.ExecuteNonQuery();
+                ViewState["attemptid"] = int.Parse(sqlCommand.ExecuteScalar().ToString());
                 sqlconn1.Close();
             }
 
@@ -168,29 +194,89 @@ namespace Quiz_Web_App
             storeAttempt(arlist1, arlist2);
         }
 
-        public void storeAttempt(ArrayList list1, ArrayList list2)
+        private void storeAttempt(ArrayList list1, ArrayList list2)
         {
-            using (SqlConnection sqlconn = new SqlConnection(mainconn))
+            if (ViewState["attemptid"] != null)
             {
-                SqlCommand sqlCommand = new SqlCommand("UpdateAttempt", sqlconn);
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@attemptid", attemptid);
+                int attemptid = int.Parse(ViewState["attemptid"].ToString());
                 
-                foreach(int qid in list1)
+                using (SqlConnection sqlconn = new SqlConnection(mainconn))
                 {
-                    sqlCommand.Parameters.AddWithValue("@quesid", qid);
-                }
-                
-                foreach(int ansid in list2)
-                {
-                    sqlCommand.Parameters.AddWithValue("@option", ansid);
-                }
+                    SqlCommand sqlCommand = new SqlCommand("UpdateAttempt", sqlconn);
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@attemptid", attemptid);
 
-                sqlconn.Open();
-                sqlCommand.ExecuteNonQuery();
-                sqlconn.Close();
+                    foreach (int qid in list1)
+                    {
+                        sqlCommand.Parameters.AddWithValue("@quesid", qid);
+                    }
+
+                    foreach (int ansid in list2)
+                    {
+                        sqlCommand.Parameters.AddWithValue("@option", ansid);
+                    }
+
+                    sqlconn.Open();
+                    sqlCommand.ExecuteNonQuery();
+                    sqlconn.Close();
+                }
             }
 
         }
+
+        protected void ddl_class_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddl_class.SelectedValue != "-1")
+            {
+                ArrayList quizList = new ArrayList();
+                int class_id = int.Parse(ddl_class.SelectedValue);
+                using (SqlConnection con = new SqlConnection(mainconn))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("GetStudentQuiz", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@class_id", class_id);
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
+                    DataTable dataTable = new DataTable();
+                    sqlDataAdapter.Fill(dataTable);
+                    con.Close();
+                    for (int i = 0; i < dataTable.Rows.Count; i++)
+                    {
+                        quizList.Add(new ListItem(dataTable.Rows[i]["quiz_title"].ToString(), dataTable.Rows[i]["quiz_id"].ToString()));
+                    }
+
+                }
+                foreach (ListItem item in quizList)
+                {
+                    ddl_quiz.Items.Add(item);
+                }
+            }
+        }
+
+        protected void btn_getData_Click(object sender, EventArgs e)
+        {
+            if (validateInput())
+            {
+                BindGrid();
+            }
+        }
+
+        private bool validateInput()
+        {
+            // dropdownlist quiz and class cannot be null
+            if (ddl_class.SelectedValue == "-1" || ddl_quiz.SelectedValue == "-1")
+            {
+                //ErrorMessage.Visible = true;
+                //SuccessMessage.Visible = false;
+                //ErrorMessage.Text = "Class or Quiz is not selected. Please select your choice.";
+                // can implement error message
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
     }
 }
