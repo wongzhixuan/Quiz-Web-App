@@ -33,7 +33,7 @@ namespace Quiz_Web_App
             ArrayList classList = new ArrayList();
             if (Session["CardID"] != null)
             {
-                int teacher_id = int.Parse(Session["CardID"].ToString());
+                string teacher_id = Session["CardID"];
                 using (SqlConnection con = new SqlConnection(connection_string))
                 {
                     con.Open();
