@@ -11,7 +11,7 @@ namespace Quiz_Web_App
 {
     public partial class Register : System.Web.UI.Page
     {
-        string connectionString = @"Data Source=MAIKE\SQL2019;Initial Catalog=QuizApp;Integrated Security=True";
+        string connectionString = @"Data Source=MAIKE\SQL2019;Initial Catalog=QuizWebsiteDB;Integrated Security=True";
 
 
         protected void Page_Load(object sender, EventArgs e)

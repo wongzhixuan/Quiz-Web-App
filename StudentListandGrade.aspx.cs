@@ -15,7 +15,7 @@ namespace Quiz_Web_App
     {
         private const string ASCENDING = " ASC";
         private const string DESCENDING = " DESC";
-        string connection_string = @"Data Source=LAPTOP-USER;Initial Catalog=QuizWebsiteDB;Integrated Security=True";
+        string connection_string = @"Data Source=MAIKE\SQL2019;Initial Catalog=QuizWebsiteDB;Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -33,13 +33,12 @@ namespace Quiz_Web_App
             ArrayList classList = new ArrayList();
             if (Session["CardID"] != null)
             {
-                int teacher_id = int.Parse(Session["CardID"].ToString());
                 using (SqlConnection con = new SqlConnection(connection_string))
                 {
                     con.Open();
                     SqlCommand cmd = new SqlCommand("GetClasses", con);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@teacher_id", teacher_id);
+                    cmd.Parameters.AddWithValue("@teacher_id", Session["CardID"]);
                     SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     sqlDataAdapter.Fill(dataTable);
@@ -67,7 +66,7 @@ namespace Quiz_Web_App
                     sqlConnection.Open();
                     SqlCommand sqlCmd = new SqlCommand("ViewStudentResults", sqlConnection);
                     sqlCmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    sqlCmd.Parameters.AddWithValue("@teacher_id ", int.Parse(Session["CardID"].ToString()));
+                    sqlCmd.Parameters.AddWithValue("@teacher_id ", Session["CardID"]);
                     sqlCmd.Parameters.AddWithValue("@quiz_id", quiz_id);
                     sqlCmd.Parameters.AddWithValue("@class_id", class_id);
                     SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCmd);
@@ -126,14 +125,13 @@ namespace Quiz_Web_App
             if (ddl_class.SelectedValue != "-1")
             {
                 ArrayList quizList = new ArrayList();
-                int teacher_id = int.Parse(Session["CardID"].ToString());
                 int class_id = int.Parse(ddl_class.SelectedValue);
                 using (SqlConnection con = new SqlConnection(connection_string))
                 {
                     con.Open();
                     SqlCommand cmd = new SqlCommand("GetQuizzes", con);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@teacher_id", teacher_id);
+                    cmd.Parameters.AddWithValue("@teacher_id", Session["CardID"]);
                     cmd.Parameters.AddWithValue("@class_id", class_id);
                     SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
