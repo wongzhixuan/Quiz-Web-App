@@ -32,13 +32,13 @@
                             <asp:TemplateField HeaderStyle-Width="60%">
                                 <ItemTemplate>
                                     <div class="quiz_question">
-                                        <asp:Label runat="server" Text="Question"></asp:Label>
-                                        <asp:Label ID="Ques_id" runat="server" Text='<%#Eval("Ques_id") %>'></asp:Label>.
+                                        <asp:Label runat="server" Text="Question id"></asp:Label>
+                                        <asp:Label ID="Ques_id" runat="server" Text='<%# Bind("Ques_id") %>'></asp:Label>.
                                         <asp:Label runat="server" Text="(Score: "></asp:Label>
-                                        <asp:Label ID="Points" runat="server" Text='<%#Eval("Score") %>'></asp:Label>
+                                        <asp:Label ID="Points" runat="server" Text='<%#Bind("Score") %>'></asp:Label>
                                         <asp:Label runat="server" Text=")"></asp:Label>
                                         <br />
-                                        <asp:Label ID="Title" runat="server" Text='<%#Eval("Title") %>'></asp:Label>
+                                        <asp:Label ID="Title" runat="server" Text='<%#Bind("Title") %>'></asp:Label>
                                     </div>
                                 </ItemTemplate>
                             </asp:TemplateField>
@@ -47,16 +47,16 @@
                             <asp:TemplateField HeaderStyle-Width="40%">
                                 <ItemTemplate>
                                     <div class="quiz_option">
-                                        <asp:RadioButton class="radio" runat="server" ID="Op1" Text='<%#Eval("Option1") %>' GroupName="Options" /><br />
-                                        <asp:RadioButton class="radio" runat="server" ID="Op2" Text='<%#Eval("Option2") %>' GroupName="Options" /><br />
-                                        <asp:RadioButton class="radio" runat="server" ID="Op3" Text='<%#Eval("Option3") %>' GroupName="Options" /><br />
-                                        <asp:RadioButton class="radio" runat="server" ID="Op4" Text='<%#Eval("Option4") %>' GroupName="Options" /><br />
+                                        <asp:RadioButton class="radio" runat="server" ID="Op1" Text='<%#Bind("Option1") %>' GroupName="Options" /><br />
+                                        <asp:RadioButton class="radio" runat="server" ID="Op2" Text='<%#Bind("Option2") %>' GroupName="Options" /><br />
+                                        <asp:RadioButton class="radio" runat="server" ID="Op3" Text='<%#Bind("Option3") %>' GroupName="Options" /><br />
+                                        <asp:RadioButton class="radio" runat="server" ID="Op4" Text='<%#Bind("Option4") %>' GroupName="Options" /><br />
                                         <br />
                                     </div>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField>
-                                <ItemTemplate>
+                            <asp:TemplateField >
+                                <ItemTemplate >
                                     <asp:Label ID="SelectedAns" runat="server" Text=""></asp:Label><br />
                                 </ItemTemplate>
                             </asp:TemplateField>

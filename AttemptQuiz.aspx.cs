@@ -89,8 +89,7 @@ namespace Quiz_Web_App
 
             int i = 0;
             int count = 0;
-            var arlist1 = new ArrayList();
-            var arlist2 = new ArrayList();
+            ArrayList arlist1 = new ArrayList();
 
             foreach(GridViewRow gr in GridView1.Rows)
             {
@@ -100,7 +99,7 @@ namespace Quiz_Web_App
                 RadioButton rb4 = (RadioButton)gr.FindControl("Op4");
                 int qid = Convert.ToInt32(dt.Rows[i]["Ques_id"]);
                 int ansid = 0;
-                if(rb1 != null)
+                if(rb1.Checked == true)
                 {
                     ansid = 1;
                     if(ansid == Convert.ToInt32(dt.Rows[i]["AnsId"]))
@@ -118,7 +117,7 @@ namespace Quiz_Web_App
                         Result.Text = "The Selected Option is Incorrect. The Correct Answer is " + corrAns;
                     }
                 }
-                if (rb2 != null)
+                else if (rb2.Checked == true)
                 {
                     ansid = 2;
                     if (ansid == Convert.ToInt32(dt.Rows[i]["AnsId"]))
@@ -136,7 +135,7 @@ namespace Quiz_Web_App
                         Result.Text = "The Selected Option is Incorrect. The Correct Answer is " + corrAns;
                     }
                 }
-                if (rb3 != null)
+                else if (rb3.Checked == true)
                 {
                     ansid = 3;
                     if (ansid == Convert.ToInt32(dt.Rows[i]["AnsId"]))
@@ -154,7 +153,7 @@ namespace Quiz_Web_App
                         Result.Text = "The Selected Option is Incorrect. The Correct Answer is " + corrAns;
                     }
                 }
-                if (rb4 != null)
+                else if (rb4.Checked == true)
                 {
                     ansid = 4;
                     if (ansid == Convert.ToInt32(dt.Rows[i]["AnsId"]))
@@ -172,8 +171,8 @@ namespace Quiz_Web_App
                         Result.Text = "The Selected Option is Incorrect. The Correct Answer is " + corrAns;
                     }
                 }
-                arlist1.Add(qid);
-                arlist2.Add(ansid);
+                ListItem item = new ListItem(qid.ToString(), ansid.ToString());
+                arlist1.Add(item);
                 i++;
             }
 
@@ -191,10 +190,10 @@ namespace Quiz_Web_App
             }
 
             Score.Text = "Your Score Is " + count;
-            storeAttempt(arlist1, arlist2);
+            storeAttempt(arlist1);
         }
 
-        private void storeAttempt(ArrayList list1, ArrayList list2)
+        private void storeAttempt(ArrayList list1)
         {
             if (ViewState["attemptid"] != null)
             {
@@ -202,23 +201,18 @@ namespace Quiz_Web_App
                 
                 using (SqlConnection sqlconn = new SqlConnection(mainconn))
                 {
-                    SqlCommand sqlCommand = new SqlCommand("UpdateAttempt", sqlconn);
-                    sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@attemptid", attemptid);
-
-                    foreach (int qid in list1)
+                    foreach (ListItem item in list1)
                     {
-                        sqlCommand.Parameters.AddWithValue("@quesid", qid);
+                        SqlCommand sqlCommand = new SqlCommand("UpdateAttempt", sqlconn);
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        sqlCommand.Parameters.AddWithValue("@attemptid", attemptid);
+                        sqlCommand.Parameters.AddWithValue("@quesid", item.Text);
+                        sqlCommand.Parameters.AddWithValue("@option", item.Value);
+                        
+                        sqlconn.Open();
+                        sqlCommand.ExecuteNonQuery();
+                        sqlconn.Close();
                     }
-
-                    foreach (int ansid in list2)
-                    {
-                        sqlCommand.Parameters.AddWithValue("@option", ansid);
-                    }
-
-                    sqlconn.Open();
-                    sqlCommand.ExecuteNonQuery();
-                    sqlconn.Close();
                 }
             }
 

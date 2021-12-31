@@ -11,10 +11,8 @@
                             <li>
                                 <h3>MENU</h3>
                             </li>
-                            <li class="animation"><a href="TeachersMenu.aspx">Dashboard</a></li>
-                            <li class="animation"><a href="Manage Class.aspx">Manage Class</a></li>
-                            <li class="animation"><a href="Manage Quiz.aspx">Manage Quiz</a></li>
-                            <li class="animation" style="margin-top: 5px"><a href="Testing.aspx">Student Grades</a></li>
+                            <li class="animation"><a href="StudentsMenu.aspx">Dashboard</a></li>
+                            <li class="animation"><a href="AttemptQuiz.aspx">Attempt Quiz</a></li>
 
                         </ul>
                     </nav>
