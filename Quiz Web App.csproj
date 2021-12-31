@@ -112,7 +112,6 @@
     <Content Include="EditQuiz.aspx" />
     <Content Include="CreateQuiz-Question.aspx" />
     <Content Include="ManageClassStudent.aspx" />
-    <Content Include="Testing.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttemptQuiz.aspx.cs">
@@ -220,13 +219,6 @@
     </Compile>
     <Compile Include="ManageClassStudent.aspx.designer.cs">
       <DependentUpon>ManageClassStudent.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Testing.aspx.cs">
-      <DependentUpon>Testing.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Testing.aspx.designer.cs">
-      <DependentUpon>Testing.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
