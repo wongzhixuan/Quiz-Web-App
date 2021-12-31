@@ -1,6 +1,4 @@
-﻿
-
-<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="TeachersMenu.aspx.cs" Inherits="Quiz_Web_App.TeachersMenu" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="TeachersMenu.aspx.cs" Inherits="Quiz_Web_App.TeachersMenu" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -16,7 +14,7 @@
                             <li class="animation"><a href="TeachersMenu.aspx">Dashboard</a></li>
                             <li class="animation"><a href="Manage Class.aspx">Manage Class</a></li>
                             <li class="animation"><a href="Manage Quiz.aspx">Manage Quiz</a></li>
-                            <li class="animation" style="margin-top: 5px"><a href="Testing.aspx">Student Grades</a></li>
+                            <li class="animation" style="margin-top: 5px"><a href="StudentListandGrade.aspx">Student Grades</a></li>
 
                         </ul>
                     </nav>

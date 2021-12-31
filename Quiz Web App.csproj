@@ -102,7 +102,6 @@
     <Content Include="Resources\Images\Shinsen-gumi.png" />
     <Content Include="StudentListandGrade.aspx" />
     <Content Include="StudentsMenu.aspx" />
-    <Content Include="StudentsProfile.aspx" />
     <Content Include="Resources\js\jquery.sticky.js" />
     <Content Include="Web.config" />
     <Content Include="TeachersMenu.aspx" />
@@ -113,7 +112,6 @@
     <Content Include="EditQuiz.aspx" />
     <Content Include="CreateQuiz-Question.aspx" />
     <Content Include="ManageClassStudent.aspx" />
-    <Content Include="Testing.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttemptQuiz.aspx.cs">
@@ -165,13 +163,6 @@
     </Compile>
     <Compile Include="StudentsMenu.aspx.designer.cs">
       <DependentUpon>StudentsMenu.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="StudentsProfile.aspx.cs">
-      <DependentUpon>StudentsProfile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="StudentsProfile.aspx.designer.cs">
-      <DependentUpon>StudentsProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="TeachersMenu.aspx.cs">
       <DependentUpon>TeachersMenu.aspx</DependentUpon>
@@ -228,13 +219,6 @@
     </Compile>
     <Compile Include="ManageClassStudent.aspx.designer.cs">
       <DependentUpon>ManageClassStudent.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Testing.aspx.cs">
-      <DependentUpon>Testing.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Testing.aspx.designer.cs">
-      <DependentUpon>Testing.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
