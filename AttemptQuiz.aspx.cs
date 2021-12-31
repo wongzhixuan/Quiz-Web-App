@@ -13,7 +13,7 @@ namespace Quiz_Web_App
     public partial class AttemptQuiz : System.Web.UI.Page
     {
         string mainconn = @"Data Source=localhost;Initial Catalog=QuizDB;Integrated Security=True";
-
+        int attemptid = 0;
         protected void Page_Load(object sender, System.EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -61,6 +61,7 @@ namespace Quiz_Web_App
 
             int i = 0;
             int count = 0;
+            int selected = 0;
             foreach(GridViewRow gr in GridView1.Rows)
             {
                 RadioButton rb1 = (RadioButton)gr.FindControl("Op1");
@@ -145,30 +146,22 @@ namespace Quiz_Web_App
                     }
                 }
             }
-            storeScore(count);
-            Score.Text = "Your Score Is " + count;
-        }
 
-        private void storeScore(int count)
-        {
-            int quizID = int.Parse(ViewState["quizID"].ToString());
-            string cardid = Convert.ToString(Session["CardID"]);
-
-            using (SqlConnection sqlconn = new SqlConnection(mainconn))
+            using (SqlConnection sqlconn1 = new SqlConnection(mainconn))
             {
-                SqlCommand sqlCommand = new SqlCommand("UpdateScore", sqlconn);
+                SqlCommand sqlCommand = new SqlCommand("UpdateScore", sqlconn1);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@quizid", quizID);
                 sqlCommand.Parameters.AddWithValue("@userid", cardid);
                 sqlCommand.Parameters.AddWithValue("@status", 1);
                 sqlCommand.Parameters.AddWithValue("@score", count);
-
-                sqlconn.Open();
+                sqlconn1.Open();
+                attemptid = int.Parse(sqlCommand.ExecuteScalar().ToString());
                 sqlCommand.ExecuteNonQuery();
-                sqlconn.Close();
+                sqlconn1.Close();
             }
 
-
+            Score.Text = "Your Score Is " + count;
         }
 
         private void storeAttempt(int b, int c)
@@ -177,6 +170,7 @@ namespace Quiz_Web_App
             {
                 SqlCommand sqlCommand = new SqlCommand("UpdateAttempt", sqlconn);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@attemptid", attemptid);
                 sqlCommand.Parameters.AddWithValue("@quesid", b);
                 sqlCommand.Parameters.AddWithValue("@option", c);
 
