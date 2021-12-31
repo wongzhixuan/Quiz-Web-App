@@ -22,13 +22,16 @@ namespace Quiz_Web_App
 
         public void BindGrid()
         {
+            string cardid = Convert.ToString(Session["CardID"]);
             SqlConnection sqlconn = new SqlConnection(mainconn);
-            string sqlquery = "SELECT q.Ques_id, q.Title, q.Score, o.Option1, o.Option2, o.Option3, o.Option4, a.AnsId FROM Quiz_question q INNER JOIN Quiz_option AS o ON q.Ques_id = o.Ques_id INNER JOIN Quiz_ans AS a ON q.Ques_id = a.QuesId";
+            string sqlquery = "SELECT q.Quiz_id, q.Ques_id, q.Title, q.Score, o.Option1, o.Option2, o.Option3, o.Option4, a.AnsId FROM Quiz_question q INNER JOIN Quiz_option AS o ON q.Ques_id = o.Ques_id INNER JOIN Quiz_ans AS a ON q.Ques_id = a.QuesId WHERE q.Quiz_id = @quizid";
             sqlconn.Open();
             SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
+            sqlcomm.Parameters.AddWithValue("@quizid", cardid);
             SqlDataAdapter da = new SqlDataAdapter(sqlcomm);
             DataTable dt = new DataTable ();
             da.Fill(dt);
+
             Repeater1.DataSource = dt;
             Repeater1.DataBind();
             sqlconn.Close();
@@ -37,7 +40,7 @@ namespace Quiz_Web_App
         protected void BtnSubmit_Click(object sender, EventArgs e)
         {
             SqlConnection sqlconn = new SqlConnection(mainconn);
-            string sqlquery = "Select O.Option1, O.Option2, O.Option3, O.Option4, A.QuesId, A.AnsId, Q.Score FROM Quiz_option AS O JOIN Quiz_ans  AS A ON O.Ques_id = A.QuesId JOIN Quiz_question AS Q ON Q.Ques_id = O.Ques_id";
+            string sqlquery = "Select O.Option1, O.Option2, O.Option3, O.Option4, A.QuesId, A.AnsId, Q.Score, Q.Quiz_id FROM Quiz_option AS O JOIN Quiz_ans  AS A ON O.Ques_id = A.QuesId JOIN Quiz_question AS Q ON Q.Ques_id = O.Ques_id";
             sqlconn.Open();
             SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
             SqlDataAdapter da = new SqlDataAdapter(sqlcomm);
@@ -130,13 +133,26 @@ namespace Quiz_Web_App
                 }
                 else
                 {
+                    int z = Convert.ToInt32(dt2.Rows[i][1]);
+                    string corrAns = Convert.ToString(dt.Rows[i][z-1]);
                     Label Result = (Label)ri.FindControl("SelectedAns");
-                    Result.Text = "The Selected Option is Incorrect";
+                    Result.Text = "The Selected Option is Incorrect. The Correct Answer is " + corrAns;
                     Result.ForeColor = System.Drawing.Color.Red;
                     total += Convert.ToInt32(dt2.Rows[i][2]);
                 }
                 i++;
             }
+
+            string sqlquery1 = "INSERT INTO attempt(quizId, userId, status, Score) VALUES(@quizID, @CardID, 1, '" + count + "')";
+            sqlconn.Open();
+            SqlCommand sqlcomm1 = new SqlCommand();
+            SqlDataAdapter da1 = new SqlDataAdapter();
+            sqlcomm1 = new SqlCommand(sqlquery1, sqlconn);
+            da1.InsertCommand = new SqlCommand(sqlquery1, sqlconn);
+            da1.InsertCommand.ExecuteNonQuery();
+            sqlconn.Close();
+
+
             Score.Text = "Your Score Is " + count + " / " + total;
         }
     }
