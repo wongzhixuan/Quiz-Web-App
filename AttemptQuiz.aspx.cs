@@ -12,148 +12,139 @@ namespace Quiz_Web_App
 {
     public partial class AttemptQuiz : System.Web.UI.Page
     {
-        string mainconn = ConfigurationManager.ConnectionStrings["QuizWebsiteDBConnectionString"].ConnectionString;
+        string mainconn = @"Data Source=localhost;Initial Catalog=QuizDB;Integrated Security=True";
 
         protected void Page_Load(object sender, System.EventArgs e)
         {
             if (!Page.IsPostBack)
+            {
+                HttpCookie quizcookie = Request.Cookies["quizInfo"];
+                if (quizcookie != null)
+                {
+                    ViewState["quizID"] = int.Parse(quizcookie["quizID"].ToString());
+                }
                 BindGrid();
+            }
         }
 
         public void BindGrid()
         {
+            int quizID = int.Parse(ViewState["quizID"].ToString());
             string cardid = Convert.ToString(Session["CardID"]);
             SqlConnection sqlconn = new SqlConnection(mainconn);
-            string sqlquery = "SELECT q.Quiz_id, q.Ques_id, q.Title, q.Score, o.Option1, o.Option2, o.Option3, o.Option4, a.AnsId FROM Quiz_question q INNER JOIN Quiz_option AS o ON q.Ques_id = o.Ques_id INNER JOIN Quiz_ans AS a ON q.Ques_id = a.QuesId WHERE q.Quiz_id = @quizid";
             sqlconn.Open();
-            SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
-            sqlcomm.Parameters.AddWithValue("@quizid", cardid);
-            SqlDataAdapter da = new SqlDataAdapter(sqlcomm);
+            SqlCommand sqlCmd = new SqlCommand("ViewQuizDetails", sqlconn);
+            sqlCmd.CommandType = System.Data.CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@Quiz_id", quizID);
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCmd);
             DataTable dt = new DataTable ();
-            da.Fill(dt);
+            sqlDataAdapter.Fill(dt);
+            ViewState["Paging"] = dt;
 
-            Repeater1.DataSource = dt;
-            Repeater1.DataBind();
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+
             sqlconn.Close();
         }
 
         protected void BtnSubmit_Click(object sender, EventArgs e)
         {
+            int quizID = int.Parse(ViewState["quizID"].ToString());
+            string cardid = Convert.ToString(Session["CardID"]);
             SqlConnection sqlconn = new SqlConnection(mainconn);
-            string sqlquery = "Select O.Option1, O.Option2, O.Option3, O.Option4, A.QuesId, A.AnsId, Q.Score, Q.Quiz_id FROM Quiz_option AS O JOIN Quiz_ans  AS A ON O.Ques_id = A.QuesId JOIN Quiz_question AS Q ON Q.Ques_id = O.Ques_id";
             sqlconn.Open();
-            SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
-            SqlDataAdapter da = new SqlDataAdapter(sqlcomm);
+            SqlCommand sqlCmd = new SqlCommand("ViewQuizDetails", sqlconn);
+            sqlCmd.CommandType = System.Data.CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@Quiz_id", quizID);
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCmd);
             DataTable dt = new DataTable();
-            da.Fill(dt);
-
-            DataTable dt1 = new DataTable();
-            DataColumn dc = new DataColumn("Qid", typeof(int));
-            dt1.Columns.Add(dc);
-            dc = new DataColumn("Aid", typeof(int));
-            dt1.Columns.Add(dc);
-            DataRow dr = dt1.NewRow();
-
-            foreach (RepeaterItem ri in Repeater1.Items)
-            {
-                RadioButton rb1 = (RadioButton)ri.FindControl("Op1");
-                RadioButton rb2 = (RadioButton)ri.FindControl("Op2");
-                RadioButton rb3 = (RadioButton)ri.FindControl("Op3");
-                RadioButton rb4 = (RadioButton)ri.FindControl("Op4");
-                Label QuestionID = (Label)ri.FindControl("Ques_id");
-                int QID = Convert.ToInt32(QuestionID.Text);
-                int AID;
-                if (rb1.Checked == true)
-                {
-                    AID = 1;
-                    dt1.Rows.Add(QID, AID);
-                }
-                else if (rb2.Checked == true)
-                {
-                    AID = 2;
-                    dt1.Rows.Add(QID, AID);
-                }
-                else if (rb3.Checked == true)
-                {
-                    AID = 3;
-                    dt1.Rows.Add(QID, AID);
-                }
-                else if (rb4.Checked == true)
-                {
-                    AID = 4;
-                    dt1.Rows.Add(QID, AID);
-                }
-                else
-                {
-                    AID = 0;
-                    dt1.Rows.Add(QID, AID);
-                }
-                rb1.Enabled = false;
-                rb2.Enabled = false;
-                rb3.Enabled = false;
-                rb4.Enabled = false;
-            }
-
-            DataTable dt2 = new DataTable();
-            dc = new DataColumn("Qid", typeof(int));
-            dt2.Columns.Add(dc);
-            dc = new DataColumn("Aid", typeof(int));
-            dt2.Columns.Add(dc);
-            dc = new DataColumn("SCR", typeof(int));
-            dt2.Columns.Add(dc);
-
-
-            foreach (DataRow dr1 in dt.Rows)
-            {
-                int QID = Convert.ToInt32(dr1[4]);
-                int AID = Convert.ToInt32(dr1[5]);
-                int SCR = Convert.ToInt32(dr1[6]);
-                dt2.Rows.Add(QID, AID, SCR);
-            }
+            sqlDataAdapter.Fill(dt);
+            ViewState["Paging"] = dt;
 
             int i = 0;
             int count = 0;
-            int total = 0;
-            foreach (RepeaterItem ri in Repeater1.Items)
+            foreach(GridViewRow gr in GridView1.Rows)
             {
-                if (Equals(dt1.Rows[i][1], dt2.Rows[i][1]))
+                RadioButton rb1 = (RadioButton)gr.FindControl("Op1");
+                RadioButton rb2 = (RadioButton)gr.FindControl("Op2");
+                RadioButton rb3 = (RadioButton)gr.FindControl("Op3");
+                RadioButton rb4 = (RadioButton)gr.FindControl("Op4");
+
+                if(rb1 != null)
                 {
-                    Label Result = (Label)ri.FindControl("SelectedAns");
-                    Result.Text = "The Selected Option is Correct";
-                    Result.ForeColor = System.Drawing.Color.Green;
-                    count += Convert.ToInt32(dt2.Rows[i][2]);
-                    total += Convert.ToInt32(dt2.Rows[i][2]);
+                    int ansid = 1;
+                    if(ansid == Convert.ToInt32(dt.Rows[i][8]))
+                    {
+                        Label Result = (Label)gr.FindControl("SelectedAns");
+                        Result.Text = "The Selected Option is Correct";
+                        Result.ForeColor = System.Drawing.Color.Green;
+                        count++;
+                    }
+                    else
+                    {
+                        int z = Convert.ToInt32(dt.Rows[i][8]);
+                        string corrAns = Convert.ToString(dt.Rows[i][z]);
+                        Label Result = (Label)gr.FindControl("SelectedAns");
+                        Result.Text = "The Selected Option is Incorrect. The Correct Answer is " + corrAns;
+                    }
                 }
-                else if (Equals(dt1.Rows[i][1], 0))
+                if (rb2 != null)
                 {
-                    Label Result = (Label)ri.FindControl("SelectedAns");
-                    Result.Text = "No Option Was Selected";
-                    Result.ForeColor = System.Drawing.Color.Red;
-                    total += Convert.ToInt32(dt2.Rows[i][2]);
+                    int ansid = 2;
+                    if (ansid == Convert.ToInt32(dt.Rows[i][8]))
+                    {
+                        Label Result = (Label)gr.FindControl("SelectedAns");
+                        Result.Text = "The Selected Option is Correct";
+                        Result.ForeColor = System.Drawing.Color.Green;
+                        count++;
+                    }
+                    else
+                    {
+                        int z = Convert.ToInt32(dt.Rows[i][8]);
+                        string corrAns = Convert.ToString(dt.Rows[i][z]);
+                        Label Result = (Label)gr.FindControl("SelectedAns");
+                        Result.Text = "The Selected Option is Incorrect. The Correct Answer is " + corrAns;
+                    }
                 }
-                else
+                if (rb3 != null)
                 {
-                    int z = Convert.ToInt32(dt2.Rows[i][1]);
-                    string corrAns = Convert.ToString(dt.Rows[i][z-1]);
-                    Label Result = (Label)ri.FindControl("SelectedAns");
-                    Result.Text = "The Selected Option is Incorrect. The Correct Answer is " + corrAns;
-                    Result.ForeColor = System.Drawing.Color.Red;
-                    total += Convert.ToInt32(dt2.Rows[i][2]);
+                    int ansid = 3;
+                    if (ansid == Convert.ToInt32(dt.Rows[i][8]))
+                    {
+                        Label Result = (Label)gr.FindControl("SelectedAns");
+                        Result.Text = "The Selected Option is Correct";
+                        Result.ForeColor = System.Drawing.Color.Green;
+                        count++;
+                    }
+                    else
+                    {
+                        int z = Convert.ToInt32(dt.Rows[i][8]);
+                        string corrAns = Convert.ToString(dt.Rows[i][z]);
+                        Label Result = (Label)gr.FindControl("SelectedAns");
+                        Result.Text = "The Selected Option is Incorrect. The Correct Answer is " + corrAns;
+                    }
                 }
-                i++;
+                if (rb4 != null)
+                {
+                    int ansid = 4;
+                    if (ansid == Convert.ToInt32(dt.Rows[i][8]))
+                    {
+                        Label Result = (Label)gr.FindControl("SelectedAns");
+                        Result.Text = "The Selected Option is Correct";
+                        Result.ForeColor = System.Drawing.Color.Green;
+                        count++;
+                    }
+                    else
+                    {
+                        int z = Convert.ToInt32(dt.Rows[i][8]);
+                        string corrAns = Convert.ToString(dt.Rows[i][z]);
+                        Label Result = (Label)gr.FindControl("SelectedAns");
+                        Result.Text = "The Selected Option is Incorrect. The Correct Answer is " + corrAns;
+                    }
+                }
             }
 
-            string sqlquery1 = "INSERT INTO attempt(quizId, userId, status, Score) VALUES(@quizID, @CardID, 1, '" + count + "')";
-            sqlconn.Open();
-            SqlCommand sqlcomm1 = new SqlCommand();
-            SqlDataAdapter da1 = new SqlDataAdapter();
-            sqlcomm1 = new SqlCommand(sqlquery1, sqlconn);
-            da1.InsertCommand = new SqlCommand(sqlquery1, sqlconn);
-            da1.InsertCommand.ExecuteNonQuery();
-            sqlconn.Close();
-
-
-            Score.Text = "Your Score Is " + count + " / " + total;
+            Score.Text = "Your Score Is " + count;
         }
     }
 }
