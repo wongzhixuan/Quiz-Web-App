@@ -13,7 +13,7 @@ namespace Quiz_Web_App
 {
     public partial class WebForm7 : System.Web.UI.Page
     {
-        string connection_string = @"Data Source=LAPTOP-R7G5DB4N;Initial Catalog=QuizWebsiteDB;Integrated Security=True";
+        string connection_string = @"Data Source=MAIKE\SQL2019;Initial Catalog=QuizWebsiteDB;Integrated Security=True";
 
         protected void Page_Load(object sender, EventArgs e)
         {

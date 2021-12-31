@@ -24,39 +24,41 @@
     <div class="content-container">
         <asp:Label ID="lblCardID" runat="server" />
         
-        <div class="form-control w-75 ">
+        <div class="form-control w-100 ">
             <table align="center">
                 <tr>
                     <td class="auto-style1">
                         <asp:Label Text="Your Full Name: " runat="server" CssClass="col-sm-2 col-form-label"/>
                     </td>
                     <td colspan="2">
-                        <asp:TextBox Text="Your Full Name: " runat="server" ID="lblFullName" CssClass="form-control-plaintext "/>
+                        <asp:TextBox Text=" " runat="server" ID="lblFullName" CssClass="form-control-plaintext "/>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="auto-style1">
-                        <asp:Label Text="Edit Your Email Address: " runat="server" CssClass="col-sm-2 col-form-label"/>
+                        <asp:Label Text="Your Email Address: " runat="server" CssClass="col-sm-2 col-form-label"/>
                     </td>
                     <td colspan="2">
-                        <asp:Label Text="Your Email Address: " runat="server" ID="lblEmailAddress" CssClass="form-control-plaintext "/>
+                        <asp:Label Text=" " runat="server" ID="lblEmailAddress" CssClass="form-control-plaintext "/>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="auto-style1">
-                        <asp:Label Text="Edit Your Phone Number: " runat="server" CssClass="col-sm-2 col-form-label"/>
+                        <asp:Label Text="Your Phone Number: " runat="server" CssClass="col-sm-2 col-form-label"/>
                     </td>
                     <td colspan="2">
-                        <asp:Label Text="Your Phone Number: " runat="server" ID="lblPhoneNumber" CssClass="form-control-plaintext "/>
+                        <asp:Label Text=" " runat="server" ID="lblPhoneNumber" CssClass="form-control-plaintext "/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <asp:Button ID="logoutBtn" runat="server" Text="Log Out" OnClick="logoutBtn_Click" CssClass="btn btn-danger float-end" />
                     </td>
                 </tr>
             </table>
-
-            <asp:Button ID="logoutBtn" runat="server" Text="Log Out" OnClick="logoutBtn_Click" CssClass="btn btn-danger float-end" />
-            <br />
-            <br />
             <br />
         </div>
     
