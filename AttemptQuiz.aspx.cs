@@ -72,12 +72,12 @@ namespace Quiz_Web_App
                 if(rb1 != null)
                 {
                     int ansid = 1;
+                    storeAttempt(qid, 1);
                     if(ansid == Convert.ToInt32(dt.Rows[i][8]))
                     {
                         Label Result = (Label)gr.FindControl("SelectedAns");
                         Result.Text = "The Selected Option is Correct";
                         Result.ForeColor = System.Drawing.Color.Green;
-                        storeAttempt(qid, 1);
                         count++;
                     }
                     else
@@ -91,12 +91,12 @@ namespace Quiz_Web_App
                 if (rb2 != null)
                 {
                     int ansid = 2;
+                    storeAttempt(qid, 2);
                     if (ansid == Convert.ToInt32(dt.Rows[i][8]))
                     {
                         Label Result = (Label)gr.FindControl("SelectedAns");
                         Result.Text = "The Selected Option is Correct";
                         Result.ForeColor = System.Drawing.Color.Green;
-                        storeAttempt(qid, 2);
                         count++;
                     }
                     else
@@ -110,12 +110,12 @@ namespace Quiz_Web_App
                 if (rb3 != null)
                 {
                     int ansid = 3;
+                    storeAttempt(qid, 3);
                     if (ansid == Convert.ToInt32(dt.Rows[i][8]))
                     {
                         Label Result = (Label)gr.FindControl("SelectedAns");
                         Result.Text = "The Selected Option is Correct";
                         Result.ForeColor = System.Drawing.Color.Green;
-                        storeAttempt(qid, 3);
                         count++;
                     }
                     else
@@ -129,12 +129,12 @@ namespace Quiz_Web_App
                 if (rb4 != null)
                 {
                     int ansid = 4;
+                    storeAttempt(qid, 4);
                     if (ansid == Convert.ToInt32(dt.Rows[i][8]))
                     {
                         Label Result = (Label)gr.FindControl("SelectedAns");
                         Result.Text = "The Selected Option is Correct";
                         Result.ForeColor = System.Drawing.Color.Green;
-                        storeAttempt(qid, 4);
                         count++;
                     }
                     else
@@ -147,11 +147,10 @@ namespace Quiz_Web_App
                 }
             }
             storeScore(count);
-
             Score.Text = "Your Score Is " + count;
         }
 
-        private void storeScore(int a)
+        private void storeScore(int count)
         {
             int quizID = int.Parse(ViewState["quizID"].ToString());
             string cardid = Convert.ToString(Session["CardID"]);
@@ -163,7 +162,7 @@ namespace Quiz_Web_App
                 sqlCommand.Parameters.AddWithValue("@quizid", quizID);
                 sqlCommand.Parameters.AddWithValue("@userid", cardid);
                 sqlCommand.Parameters.AddWithValue("@status", 1);
-                sqlCommand.Parameters.AddWithValue("@score", a);
+                sqlCommand.Parameters.AddWithValue("@score", count);
 
                 sqlconn.Open();
                 sqlCommand.ExecuteNonQuery();
