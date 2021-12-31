@@ -30,7 +30,6 @@ namespace Quiz_Web_App
         public void BindGrid()
         {
             int quizID = int.Parse(ViewState["quizID"].ToString());
-            string cardid = Convert.ToString(Session["CardID"]);
             SqlConnection sqlconn = new SqlConnection(mainconn);
             sqlconn.Open();
             SqlCommand sqlCmd = new SqlCommand("ViewQuizDetails", sqlconn);
