@@ -15,7 +15,7 @@ namespace Quiz_Web_App
     public partial class AttemptQuiz : System.Web.UI.Page
     {
         //string mainconn = @"Data Source=localhost;Initial Catalog=QuizDB;Integrated Security=True";
-        string mainconn = @"Data Source=LAPTOP-R7G5DB4N;Initial Catalog=QuizWebsiteDB;Integrated Security=True";
+        string mainconn = @"Data Source=MAIKE\SQL2019;Initial Catalog=QuizWebsiteDB;Integrated Security=True";
         int attemptid = 0;
         protected void Page_Load(object sender, System.EventArgs e)
         {
