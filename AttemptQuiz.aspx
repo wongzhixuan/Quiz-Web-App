@@ -1,8 +1,25 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" Inherits="Quiz_Web_App.AttemptQuiz" CodeBehind="AttemptQuiz.aspx.cs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <div class="container green_container">
-            <div class="content-container">
+    <div class="container green_container">
+        <div class="content-container">
+            <asp:Label ID="Label2" runat="server" Text="Class Name: "></asp:Label>
+            <asp:DropDownList ID="ddl_class" runat="server" CssClass="btn btn-outline-primary dropdown-toggle"
+                OnSelectedIndexChanged="ddl_class_SelectedIndexChanged" AutoPostBack="True">
+                <asp:ListItem Value="-1">--classname--</asp:ListItem>
+            </asp:DropDownList>
+
+            <asp:Label ID="Label3" runat="server" Text="Quiz Name: "></asp:Label>
+            <asp:DropDownList ID="ddl_quiz" runat="server" CssClass="btn btn-outline-primary dropdown-toggle">
+                <asp:ListItem Value="-1">--quizname--</asp:ListItem>
+
+            </asp:DropDownList>
+            <div class="form-group w-50">
+                <asp:Button ID="btn_getData" runat="server" Text="Submit" CssClass="btn btn-primary float-end" OnClick="btn_getData_Click" Width="77px" />
+            </div>
+            <br />
+            <br />
+            <br />
             <div class="quiz">
                 <br />
                 <div class="quiz_score">
@@ -30,10 +47,10 @@
                             <asp:TemplateField HeaderStyle-Width="40%">
                                 <ItemTemplate>
                                     <div class="quiz_option">
-                                        <asp:RadioButton class="radio" runat="server" ID="Op1" Text='<%#Eval("Option1") %>' GroupName="Options"/><br />
-                                        <asp:RadioButton class="radio" runat="server" ID="Op2" Text='<%#Eval("Option2") %>' GroupName="Options"/><br />
-                                        <asp:RadioButton class="radio" runat="server" ID="Op3" Text='<%#Eval("Option3") %>' GroupName="Options"/><br />
-                                        <asp:RadioButton class="radio" runat="server" ID="Op4" Text='<%#Eval("Option4") %>' GroupName="Options"/><br />
+                                        <asp:RadioButton class="radio" runat="server" ID="Op1" Text='<%#Eval("Option1") %>' GroupName="Options" /><br />
+                                        <asp:RadioButton class="radio" runat="server" ID="Op2" Text='<%#Eval("Option2") %>' GroupName="Options" /><br />
+                                        <asp:RadioButton class="radio" runat="server" ID="Op3" Text='<%#Eval("Option3") %>' GroupName="Options" /><br />
+                                        <asp:RadioButton class="radio" runat="server" ID="Op4" Text='<%#Eval("Option4") %>' GroupName="Options" /><br />
                                         <br />
                                     </div>
                                 </ItemTemplate>
@@ -47,8 +64,8 @@
                     </asp:GridView>
                 </div>
                 <br />
-                <asp:Button CssClass="btn_submit" ID="BtnSubmit" runat="server" Text="Submit" OnClick="BtnSubmit_Click"/><br />
-            </div>
+                <asp:Button CssClass="btn_submit" ID="BtnSubmit" runat="server" Text="Submit" OnClick="BtnSubmit_Click" /><br />
             </div>
         </div>
+    </div>
 </asp:Content>
