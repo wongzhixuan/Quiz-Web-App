@@ -58,13 +58,13 @@ namespace Quiz_Web_App
 
         protected void student_view_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int id = int.Parse(student_view.DataKeys[e.RowIndex].Values["student_id"].ToString());
+            string id = student_view.DataKeys[e.RowIndex].Values["student_id"].ToString();
             student_delete(id);
             
             getStudentData();
         }
 
-        private void student_delete(int id)
+        private void student_delete(string id)
         {
             SqlConnection con = new SqlConnection(connection_string);
             SqlCommand cmd = new SqlCommand("DeleteStudentFromClass", con);
@@ -94,7 +94,7 @@ namespace Quiz_Web_App
             if (ViewState["classID"] != null)
             {
                 int class_id = int.Parse(ViewState["classID"].ToString());
-                int student_id = int.Parse(tx_student_id.Text);
+                string student_id = tx_student_id.Text.ToString();
                 using (SqlConnection con = new SqlConnection(connection_string))
                 {
                     SqlCommand cmd = new SqlCommand("CheckStudentClass", con);
@@ -150,7 +150,7 @@ namespace Quiz_Web_App
 
         protected void btn_checkStudent_Click(object sender, EventArgs e)
         {
-            int student_id = int.Parse(tx_student_id.Text);
+            string student_id = tx_student_id.Text.ToString();
             using(SqlConnection con = new SqlConnection(connection_string))
             {
                 con.Open();
